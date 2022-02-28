@@ -29,26 +29,14 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         
         
-        <!--
-        <mapping class="edunova.model.vjezbanje.osnovno.Mobitel" />
-        <mapping class="edunova.model.vjezbanje.osnovno.Olovka" />
-        <mapping class="edunova.model.vjezbanje.osnovno.Racunalo" />
+   
+        <mapping class="edunova.zavrsnirad.model.Kupac" />
+        <mapping class="edunova.zavrsnirad.model.Narudzba" />
+        <mapping class="edunova.zavrsnirad.model.Racunalo" />
+        <mapping class="edunova.zavrsnirad.model.Komponenta" />
+        <mapping class="edunova.zavrsnirad.model.Operater" />
         
-        <mapping class="edunova.model.vjezbanje.nasljedivanje.Primka" />
-        <mapping class="edunova.model.vjezbanje.nasljedivanje.Otpremnica" />
         
-        <mapping class="edunova.model.vjezbanje.veze.Opcina" />
-        <mapping class="edunova.model.vjezbanje.veze.Mjesto" />
-        <mapping class="edunova.model.vjezbanje.veze.Oznaka" />
-        <mapping class="edunova.model.vjezbanje.veze.Slika" />
-        -->
-        <!--
-        <mapping class="edunova.model.Polaznik" />
-        <mapping class="edunova.model.Predavac" />
-        <mapping class="edunova.model.Smjer" />
-        <mapping class="edunova.model.Grupa" />
-        <mapping class="edunova.model.Operater" />
-        -->
         
         
         

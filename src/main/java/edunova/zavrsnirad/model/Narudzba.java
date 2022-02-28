@@ -4,10 +4,47 @@
  */
 package edunova.zavrsnirad.model;
 
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author Admin
  */
-public class Narudzba {
+@Entity
+public class Narudzba extends Entitet{
+    
+    @OneToOne
+    private Kupac kupac;
+    
+    private Date datumNarudzbe;
+    
+    private Date datumOtpreme;
+
+    public Kupac getKupac() {
+        return kupac;
+    }
+
+    public void setKupac(Kupac kupac) {
+        this.kupac = kupac;
+    }
+
+    public Date getDatumNarudzbe() {
+        return datumNarudzbe;
+    }
+
+    public void setDatumNarudzbe(Date datumNarudzbe) {
+        this.datumNarudzbe = datumNarudzbe;
+    }
+
+    public Date getDatumOtpreme() {
+        return datumOtpreme;
+    }
+
+    public void setDatumOtpreme(Date datumOtpreme) {
+        this.datumOtpreme = datumOtpreme;
+    }
+    
     
 }
