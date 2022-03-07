@@ -7,6 +7,7 @@ package edunova.zavrsnirad.controller;
 import edunova.zavrsnirad.model.Osoba;
 import edunova.zavrsnirad.util.ImeValidation;
 import edunova.zavrsnirad.util.OibValidation;
+import edunova.zavrsnirad.util.PrezimeValidation;
 import edunova.zavrsnirad.util.ZavrsniRadException;
 import java.util.regex.Pattern;
 import javax.mail.internet.AddressException;
@@ -18,12 +19,14 @@ import javax.mail.internet.InternetAddress;
  */
 public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
     
+    @Override
     protected void kontrolaCreate() throws ZavrsniRadException{
         kontrolaIme();
         kontrolaPrezime();
         kontrolaEmail();
         kontrolaOib();
     }
+    @Override
     protected void kontrolaUpdate() throws ZavrsniRadException{
         kontrolaIme();
         kontrolaPrezime();
@@ -31,6 +34,7 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
         kontrolaOib();
     }
     
+    @Override
     protected void kontrolaDelete() throws ZavrsniRadException{
         
     }
@@ -40,11 +44,14 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
             throw new ZavrsniRadException("Ime mora imati prvo veliko slovo i ne smije imati brojeve ili simbole!");
             
         }
+        if(entitet.getIme().contains(".*\\d.*")) {
+            throw new ZavrsniRadException("Ime ne smije imati brojeve");
+        }
         
     }
 
     private void kontrolaPrezime() throws ZavrsniRadException{
-        if(ImeValidation.checkIme(entitet.getPrezime())) {
+        if(!PrezimeValidation.checkPrezime(entitet.getPrezime())){
             throw new ZavrsniRadException("Prezime mora imati prvo veliko slovo i ne smije imati brojeve ili simbole!");
         }
     }

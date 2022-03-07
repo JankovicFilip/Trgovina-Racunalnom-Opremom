@@ -13,19 +13,27 @@ package edunova.zavrsnirad.controller;
 import edunova.zavrsnirad.model.Kupac;
 import edunova.zavrsnirad.util.TelefonValidation;
 import edunova.zavrsnirad.util.ZavrsniRadException;
+import java.util.List;
 
-public abstract class ObradaKupac<T extends Kupac> extends Obrada<T>{
+public class ObradaKupac extends ObradaOsoba<Kupac>{
+    @Override
+    public List<Kupac> read() {
+        return session.createQuery("from Kupac").list();
+    }
+    @Override
      protected void kontrolaCreate() throws ZavrsniRadException{
-         kontrolaAdresa();
+         super.kontrolaCreate();
+         //kontrolaAdresa();
          kontrolaBrojTelefona();
      }
-     
+     @Override
      protected void kontrolaUpdate() throws ZavrsniRadException{
-         kontrolaAdresa();
+         super.kontrolaUpdate();
+         //kontrolaAdresa();
          kontrolaBrojTelefona();
      }
      
-     
+     @Override
      protected void kontrolaDelete() throws ZavrsniRadException{
          
          

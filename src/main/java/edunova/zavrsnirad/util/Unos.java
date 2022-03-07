@@ -13,6 +13,20 @@ import java.util.Scanner;
  */
 public class Unos {
     
+   public static long unesiLong(Scanner ulaz, String poruka) {
+       long i = 0;
+       while (true) {
+			System.out.println(poruka + " ");
+			i = Long.parseLong( ulaz.nextLine());
+			if (i < 1) {
+				System.out.println("Broj mora biti pozitivan");
+				continue;
+			}
+			return i;
+		}
+       
+   }
+    
     public static int unesiInt(Scanner ulaz,String poruka) {
 		int i = 0;
 

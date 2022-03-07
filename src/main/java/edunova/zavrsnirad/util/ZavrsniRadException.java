@@ -15,9 +15,15 @@ public class ZavrsniRadException extends Exception{
         return poruka;
     }
 
+    public void setPoruka(String poruka) {
+        this.poruka = poruka;
+    }
+
+    
+
     public ZavrsniRadException(String poruka) {
         super(poruka);
-        this.poruka = poruka;
+        this.setPoruka("Prevedeno " + poruka);
     }
     
     

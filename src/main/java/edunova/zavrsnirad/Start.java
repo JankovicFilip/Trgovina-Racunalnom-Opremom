@@ -4,50 +4,79 @@
  */
 package edunova.zavrsnirad;
 
-
-
 import edunova.zavrsnirad.model.Kupac;
-import edunova.zavrsnirad.model.Operater;
-import edunova.zavrsnirad.model.Osoba;
-import edunova.zavrsnirad.util.HibernateUtil;
 import java.util.Scanner;
 import org.hibernate.Session;
 import edunova.zavrsnirad.util.Unos;
+import edunova.zavrsnirad.util.ZavrsniRadException;
 import edunova.zavrsnirad.controller.Obrada;
+import edunova.zavrsnirad.controller.ObradaKupac;
+import edunova.zavrsnirad.controller.ObradaOsoba;
+import edunova.zavrsnirad.model.Osoba;
+import edunova.zavrsnirad.util.HibernateUtil;
 
 /**
  *
  * @author Admin
  */
 public class Start {
+
     private Session session;
     //private Osoba osoba;
     private Kupac kupac;
     private Scanner ulaz;
-    
-    public Start(){
-       //this.session = HibernateUtil.getSession();
-       ulaz = new Scanner(System.in);
-       unos();
-       ulaz.close();
-        
-    }
-    
-    private void unos() {
-        kupac = new Kupac();
-        kupac.setIme(Unos.unesiString(ulaz, "Koje je vaše ime?"));
-        kupac.setPrezime(Unos.unesiString(ulaz, "Koje je vaše prezime?"));
-        kupac.setEmail(Unos.unesiString(ulaz,"Molim Vas unesite vaš email!"));
-        kupac.setOib(Unos.unesiString(ulaz, "Molim Vas unesite vaš OIB!"));
-        //kupac.setAdresa(Unos.unesiString(ulaz, "Molim Vas unesite vašu adresu!"));
-        
-    }
-    private void unosKupac(){
-                kupac.setBrojTelefona(Unos.unesiString(ulaz, "Molim Vas unesite svoj broj telefona ili mobitela!"));
+
+    public Start() {
+
+        this.session = HibernateUtil.getSession();
+        ulaz = new Scanner(System.in);
+        unos();
+        ulaz.close();
 
     }
+
+    public void unos() {
+        Kupac k = new Kupac();
+        //o.setSifra(Unos.unesiLong(ulaz, "Molim vas unesite sifru!"));
+        /*k.setEmail(Unos.unesiString(ulaz, "Koji je vas email?"));
+        k.setOib(Unos.unesiString(ulaz, "Koji je vas oib?"));*/
+        ObradaKupac ok = new ObradaKupac();
+        ok.setEntitet(k);
+        try {
+            k.setIme(Unos.unesiString(ulaz, "Koje je Vase ime?"));
+
+            ok.create();
+        } catch (ZavrsniRadException e) {
+            System.out.println(e.getPoruka());
+            
+            
+        }
+        //k.setPrezime(Unos.unesiString(ulaz, "Koje je vase prezime?"));
+        try {
+            k.setPrezime(Unos.unesiString(ulaz, "Koje je vase prezime?"));
+
+            ok.create();
+        } catch (ZavrsniRadException e) {
+            System.out.println(e.getPoruka());
+        }
+        
+        /*k.setEmail(Unos.unesiString(ulaz, "Koji je vas email?"));
+        try {
+            ok.create();
+        } catch (ZavrsniRadException e) {
+            System.out.println(e.getPoruka());
+        }
+        k.setOib(Unos.unesiString(ulaz, "Koji je vas oib?"));
+        try {
+            ok.create();
+        } catch (ZavrsniRadException e) {
+            System.out.println(e.getPoruka());
+        }
+*/
+    }
+
     public static void main(String[] args) {
         new Start();
     }
-    
+
 }

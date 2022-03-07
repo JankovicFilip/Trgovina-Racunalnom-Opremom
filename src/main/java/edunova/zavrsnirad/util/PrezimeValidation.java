@@ -4,16 +4,15 @@
  */
 package edunova.zavrsnirad.util;
 
-import java.util.regex.Pattern;
-
 /**
  *
  * @author Admin
  */
-public class ImeValidation {
-     public static boolean checkIme(String ime){
+public class PrezimeValidation {
+    
+     public static boolean checkPrezime(String prezime){
          
-        return ime.matches("[A-Z][a-zA-Z]*");
+        return prezime.matches("[A-Z][a-zA-Z]*");
     }
     
 }
