@@ -31,6 +31,12 @@ public class Racunalo extends Entitet{
             inverseJoinColumns = @JoinColumn(name = "narudzba"))
     private List<Narudzba> narudzbe;
 
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
+
     public String getNaziv() {
         return naziv;
     }
