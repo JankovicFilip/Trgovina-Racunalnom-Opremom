@@ -42,7 +42,14 @@ public class Start {
         k.setOib(Unos.unesiString(ulaz, "Koji je vas oib?"));*/
         ObradaKupac ok = new ObradaKupac();
         ok.setEntitet(k);
-        try {
+        /*k.setIme(Unos.unesiString(ulaz, "Koje je Vase ime?"));
+
+        k.setPrezime(Unos.unesiString(ulaz, "Vase ime molim"));
+        k.setEmail(Unos.unesiString(ulaz, "Koji je vas email?"));
+        k.setOib(Unos.unesiString(ulaz, "Koji je vas oib?"));
+        */
+        k.setBrojTelefona(Unos.unesiString(ulaz, "Telefon"));
+        /*try {
             k.setIme(Unos.unesiString(ulaz, "Koje je Vase ime?"));
 
             ok.create();
@@ -51,16 +58,15 @@ public class Start {
             
             
         }
-        //k.setPrezime(Unos.unesiString(ulaz, "Koje je vase prezime?"));
+        k.setPrezime(Unos.unesiString(ulaz, "Koje je vase prezime?"));
         try {
             k.setPrezime(Unos.unesiString(ulaz, "Koje je vase prezime?"));
 
             ok.create();
         } catch (ZavrsniRadException e) {
             System.out.println(e.getPoruka());
-        }
-        
-        /*k.setEmail(Unos.unesiString(ulaz, "Koji je vas email?"));
+        }*/
+ /*k.setEmail(Unos.unesiString(ulaz, "Koji je vas email?"));
         try {
             ok.create();
         } catch (ZavrsniRadException e) {
@@ -72,7 +78,7 @@ public class Start {
         } catch (ZavrsniRadException e) {
             System.out.println(e.getPoruka());
         }
-*/
+         */
     }
 
     public static void main(String[] args) {

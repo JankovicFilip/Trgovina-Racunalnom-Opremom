@@ -12,6 +12,10 @@ import java.util.regex.Pattern;
  * @author Admin
  */
 public class TelefonValidation {
+    
+    public static void main(String[] args) {
+        System.out.println(vazeciBroj("095 5778 782"));
+    }
 
     public static boolean vazeciBroj(String str) {
         Pattern ptrn = Pattern.compile("(0/91)?[7-9][0-9]{9}");

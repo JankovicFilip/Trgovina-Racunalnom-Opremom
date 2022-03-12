@@ -5,6 +5,7 @@
 package edunova.zavrsnirad.model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -14,6 +15,8 @@ import javax.persistence.Entity;
 public class Kupac extends Osoba{
     private String brojTelefona;
     private String adresa;
+    
+    
 
     public String getBrojTelefona() {
         return brojTelefona;

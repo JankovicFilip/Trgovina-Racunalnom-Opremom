@@ -21,15 +21,11 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
     
     @Override
     protected void kontrolaCreate() throws ZavrsniRadException{
-        kontrolaIme();
-        kontrolaPrezime();
         kontrolaEmail();
         kontrolaOib();
     }
     @Override
     protected void kontrolaUpdate() throws ZavrsniRadException{
-        kontrolaIme();
-        kontrolaPrezime();
         kontrolaEmail();
         kontrolaOib();
     }
@@ -39,22 +35,7 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
         
     }
 
-    private void kontrolaIme() throws ZavrsniRadException{
-        if(!ImeValidation.checkIme(entitet.getIme())) {
-            throw new ZavrsniRadException("Ime mora imati prvo veliko slovo i ne smije imati brojeve ili simbole!");
-            
-        }
-        if(entitet.getIme().contains(".*\\d.*")) {
-            throw new ZavrsniRadException("Ime ne smije imati brojeve");
-        }
-        
-    }
-
-    private void kontrolaPrezime() throws ZavrsniRadException{
-        if(!PrezimeValidation.checkPrezime(entitet.getPrezime())){
-            throw new ZavrsniRadException("Prezime mora imati prvo veliko slovo i ne smije imati brojeve ili simbole!");
-        }
-    }
+    
 
     private void kontrolaEmail() throws ZavrsniRadException{
         try {

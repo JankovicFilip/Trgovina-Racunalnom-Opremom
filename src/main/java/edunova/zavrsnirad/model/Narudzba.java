@@ -5,6 +5,7 @@
 package edunova.zavrsnirad.model;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -13,13 +14,13 @@ import javax.persistence.OneToOne;
  * @author Admin
  */
 @Entity
-public class Narudzba extends Entitet{
-    
-    @OneToOne
+public class Narudzba extends Entitet {
+
+    @OneToOne(mappedBy = "narudzba")
     private Kupac kupac;
-    
+
     private Date datumNarudzbe;
-    
+
     private Date datumOtpreme;
 
     public Kupac getKupac() {
@@ -29,6 +30,8 @@ public class Narudzba extends Entitet{
     public void setKupac(Kupac kupac) {
         this.kupac = kupac;
     }
+
+    
 
     public Date getDatumNarudzbe() {
         return datumNarudzbe;
@@ -45,6 +48,5 @@ public class Narudzba extends Entitet{
     public void setDatumOtpreme(Date datumOtpreme) {
         this.datumOtpreme = datumOtpreme;
     }
-    
-    
+
 }

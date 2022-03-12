@@ -25,7 +25,7 @@ public class Osoba extends Entitet{
     }
 
     public void setIme(String ime) {
-        this.ime = ime;
+        this.ime = ime==null ? ime : ime.trim();
     }
 
     public String getPrezime() {
@@ -33,7 +33,7 @@ public class Osoba extends Entitet{
     }
 
     public void setPrezime(String prezime) {
-        this.prezime = prezime;
+        this.prezime = prezime ==null ? prezime : prezime.trim();
     }
 
     public String getEmail() {

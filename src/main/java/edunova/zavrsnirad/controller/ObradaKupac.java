@@ -23,13 +23,13 @@ public class ObradaKupac extends ObradaOsoba<Kupac>{
     @Override
      protected void kontrolaCreate() throws ZavrsniRadException{
          super.kontrolaCreate();
-         //kontrolaAdresa();
+         kontrolaAdresa();
          kontrolaBrojTelefona();
      }
      @Override
      protected void kontrolaUpdate() throws ZavrsniRadException{
          super.kontrolaUpdate();
-         //kontrolaAdresa();
+         kontrolaAdresa();
          kontrolaBrojTelefona();
      }
      
@@ -40,12 +40,15 @@ public class ObradaKupac extends ObradaOsoba<Kupac>{
      }
 
     private void kontrolaAdresa() throws ZavrsniRadException{
+       if(entitet.getAdresa()==null || entitet.getAdresa().isEmpty()) {
+           throw new ZavrsniRadException("Adresa ne smije biti prazna");
+       }
         
     }
 
     private void kontrolaBrojTelefona() throws ZavrsniRadException{
-    if(!TelefonValidation.vazeciBroj(entitet.getBrojTelefona())) {
-        throw new ZavrsniRadException("Molim vas toćno unesite svoj broj telefona");
+    if(entitet.getBrojTelefona().isEmpty() || entitet.getBrojTelefona()==null) {
+        throw new ZavrsniRadException("Broj telefona ne smije biti prazan!!");
     }
     }
     
