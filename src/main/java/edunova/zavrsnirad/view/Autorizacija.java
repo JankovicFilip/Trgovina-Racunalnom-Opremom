@@ -228,7 +228,7 @@ public class Autorizacija extends javax.swing.JFrame {
         
         OperaterUtil.operater=operater;
         
-        new Izbornik().setVisible(true);
+        //new Izbornik().setVisible(true);
         dispose();
 
 
