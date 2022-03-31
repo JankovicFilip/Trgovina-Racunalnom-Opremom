@@ -14,6 +14,8 @@ import edunova.zavrsnirad.controller.ObradaKupac;
 import edunova.zavrsnirad.controller.ObradaOsoba;
 import edunova.zavrsnirad.model.Osoba;
 import edunova.zavrsnirad.util.HibernateUtil;
+import edunova.zavrsnirad.util.PocetniInsert;
+import edunova.zavrsnirad.view.SplashScreen;
 
 /**
  *
@@ -82,7 +84,9 @@ public class Start {
     }
 
     public static void main(String[] args) {
-        new Start();
+        //new Start();
+        //PocetniInsert.inicijalniPodaci();
+        new edunova.zavrsnirad.view.SplashScreen().setVisible(true);
     }
 
 }

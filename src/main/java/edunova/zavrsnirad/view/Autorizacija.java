@@ -31,8 +31,8 @@ public class Autorizacija extends javax.swing.JFrame {
     }
     private void postavke(){
         obradaOperater = new ObradaOperater();
-        txtEmail.setText("KozukiOden@edunova.hr");
-        txtLozinka.setText("e");
+        txtEmail.setText("Filip.vno.jankovic@gmail.com");
+        txtLozinka.setText("Lozinka");
         setTitle(OperaterUtil.getNaslov("Autorizacija"));
         
     }
@@ -171,7 +171,7 @@ public class Autorizacija extends javax.swing.JFrame {
 
     private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
         // TODO add your handling code here:
-        txtEmail.setBackground(Color.BLUE);
+        txtEmail.setBackground(Color.GRAY);
     }//GEN-LAST:event_txtEmailFocusGained
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
@@ -180,7 +180,7 @@ public class Autorizacija extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailFocusLost
 
     private void txtLozinkaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLozinkaFocusGained
-        txtLozinka.setBackground(Color.BLUE);
+        txtLozinka.setBackground(Color.GRAY);
     }//GEN-LAST:event_txtLozinkaFocusGained
 
     private void txtLozinkaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLozinkaFocusLost
@@ -228,7 +228,7 @@ public class Autorizacija extends javax.swing.JFrame {
         
         OperaterUtil.operater=operater;
         
-        //new Izbornik().setVisible(true);
+        new Izbornik().setVisible(true);
         dispose();
 
 

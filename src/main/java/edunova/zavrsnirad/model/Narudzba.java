@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Narudzba extends Entitet {
 
-    @OneToOne(mappedBy = "narudzba")
+    @OneToOne
     private Kupac kupac;
 
     private Date datumNarudzbe;
