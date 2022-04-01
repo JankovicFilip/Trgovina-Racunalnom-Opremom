@@ -19,64 +19,27 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu4">
+        <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Komponente"/>
+            <Property name="text" type="java.lang.String" value="Trgovina"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiCpu">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiRacunala">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Procesori"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiGpu">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Grafi&#x10d;ke kartice"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiMb">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Mati&#x10d;ne plo&#x10d;e"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiPsu">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Napajanja"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiRam">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Radna memorija"/>
+                <Property name="text" type="java.lang.String" value="Ra&#x10d;unala"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiRamActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiRacunalaActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiFan">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiKomponente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ventilatori"/>
+                <Property name="text" type="java.lang.String" value="Komponente"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiSsd">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiNarudzbe">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Hard i SSD diskovi"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Racunala"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiLaptop">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Prijenosna ra&#x10d;unala"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiPc">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Stolna ra&#x10d;unala"/>
+                <Property name="text" type="java.lang.String" value="Narudzbe"/>
               </Properties>
             </MenuItem>
           </SubComponents>

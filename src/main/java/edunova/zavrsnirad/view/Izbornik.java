@@ -62,17 +62,10 @@ public class Izbornik extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAplikacija = new javax.swing.JMenu();
         jmiExit = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jmiCpu = new javax.swing.JMenuItem();
-        jmiGpu = new javax.swing.JMenuItem();
-        jmiMb = new javax.swing.JMenuItem();
-        jmiPsu = new javax.swing.JMenuItem();
-        jmiRam = new javax.swing.JMenuItem();
-        jmiFan = new javax.swing.JMenuItem();
-        jmiSsd = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jmiLaptop = new javax.swing.JMenuItem();
-        jmiPc = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jmiRacunala = new javax.swing.JMenuItem();
+        jmiKomponente = new javax.swing.JMenuItem();
+        jmiNarudzbe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,45 +86,23 @@ public class Izbornik extends javax.swing.JFrame {
 
         jMenuBar1.add(jmAplikacija);
 
-        jMenu4.setText("Komponente");
+        jMenu1.setText("Trgovina");
 
-        jmiCpu.setText("Procesori");
-        jMenu4.add(jmiCpu);
-
-        jmiGpu.setText("Grafičke kartice");
-        jMenu4.add(jmiGpu);
-
-        jmiMb.setText("Matične ploče");
-        jMenu4.add(jmiMb);
-
-        jmiPsu.setText("Napajanja");
-        jMenu4.add(jmiPsu);
-
-        jmiRam.setText("Radna memorija");
-        jmiRam.addActionListener(new java.awt.event.ActionListener() {
+        jmiRacunala.setText("Računala");
+        jmiRacunala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiRamActionPerformed(evt);
+                jmiRacunalaActionPerformed(evt);
             }
         });
-        jMenu4.add(jmiRam);
+        jMenu1.add(jmiRacunala);
 
-        jmiFan.setText("Ventilatori");
-        jMenu4.add(jmiFan);
+        jmiKomponente.setText("Komponente");
+        jMenu1.add(jmiKomponente);
 
-        jmiSsd.setText("Hard i SSD diskovi");
-        jMenu4.add(jmiSsd);
+        jmiNarudzbe.setText("Narudzbe");
+        jMenu1.add(jmiNarudzbe);
 
-        jMenuBar1.add(jMenu4);
-
-        jMenu5.setText("Racunala");
-
-        jmiLaptop.setText("Prijenosna računala");
-        jMenu5.add(jmiLaptop);
-
-        jmiPc.setText("Stolna računala");
-        jMenu5.add(jmiPc);
-
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -153,13 +124,13 @@ public class Izbornik extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmiRamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRamActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmiRamActionPerformed
-
     private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
             dispose();
     }//GEN-LAST:event_jmiExitActionPerformed
+
+    private void jmiRacunalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRacunalaActionPerformed
+        new RacunalaProzor().setVisible(true);
+    }//GEN-LAST:event_jmiRacunalaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,21 +138,14 @@ public class Izbornik extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu jmAplikacija;
-    private javax.swing.JMenuItem jmiCpu;
     private javax.swing.JMenuItem jmiExit;
-    private javax.swing.JMenuItem jmiFan;
-    private javax.swing.JMenuItem jmiGpu;
-    private javax.swing.JMenuItem jmiLaptop;
-    private javax.swing.JMenuItem jmiMb;
-    private javax.swing.JMenuItem jmiPc;
-    private javax.swing.JMenuItem jmiPsu;
-    private javax.swing.JMenuItem jmiRam;
-    private javax.swing.JMenuItem jmiSsd;
+    private javax.swing.JMenuItem jmiKomponente;
+    private javax.swing.JMenuItem jmiNarudzbe;
+    private javax.swing.JMenuItem jmiRacunala;
     private javax.swing.JLabel lblVrijeme;
     // End of variables declaration//GEN-END:variables
 }
