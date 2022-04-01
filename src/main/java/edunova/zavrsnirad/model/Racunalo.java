@@ -25,12 +25,10 @@ public class Racunalo extends Entitet{
     
     private BigDecimal cijena;
     
-    @ManyToMany
-    @JoinTable(name = "racunalo_narudzba",
-            joinColumns = @JoinColumn(name = "racunalo"),
-            inverseJoinColumns = @JoinColumn(name = "narudzba"))
+    @ManyToMany(mappedBy = "racunala")
     private List<Narudzba> narudzbe;
 
+    
     @Override
     public String toString() {
         return naziv;

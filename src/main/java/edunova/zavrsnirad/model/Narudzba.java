@@ -7,6 +7,7 @@ package edunova.zavrsnirad.model;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -22,6 +23,35 @@ public class Narudzba extends Entitet {
     private Date datumNarudzbe;
 
     private Date datumOtpreme;
+    @ManyToMany
+    private List<Racunalo> racunala;
+    @ManyToMany
+    private List<Komponenta> komponente;
+
+    public List<Komponenta> getKomponente() {
+        return komponente;
+    }
+
+    public void setKomponente(List<Komponenta> komponente) {
+        this.komponente = komponente;
+    }
+    
+    
+
+    public List<Racunalo> getRacunala() {
+        return racunala;
+    }
+
+    public void setRacunala(List<Racunalo> racunala) {
+        this.racunala = racunala;
+    }
+
+    @Override
+    public String toString() {
+        return datumNarudzbe + " " + datumOtpreme;
+    }
+    
+    
 
     public Kupac getKupac() {
         return kupac;

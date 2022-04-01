@@ -5,13 +5,17 @@
 package edunova.zavrsnirad.view;
 
 import edunova.zavrsnirad.controller.ObradaRacunalo;
+import edunova.zavrsnirad.model.Narudzba;
 import edunova.zavrsnirad.model.Racunalo;
 import edunova.zavrsnirad.util.OperaterUtil;
+import edunova.zavrsnirad.util.ZavrsniRadException;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,15 +37,20 @@ public class RacunalaProzor extends javax.swing.JFrame {
         setTitle(OperaterUtil.getNaslov("Računala"));
         ucitaj();
     }
+
     
-    private void ucitaj(){
+    
+    private void ucitaj() {
         DefaultListModel<Racunalo> m = new DefaultListModel<>();
         List<Racunalo> entiteti = obrada.read();
-        for(Racunalo r : entiteti) {
+        for (Racunalo r : entiteti) {
             m.addElement(r);
         }
         lstEntiteti.setModel(m);
     }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,15 +73,24 @@ public class RacunalaProzor extends javax.swing.JFrame {
         txtKreiraj = new javax.swing.JButton();
         txtPromijeni = new javax.swing.JButton();
         txtObrisi = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        txtNarudzba = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lstEntiteti.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstEntiteti.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstEntitetiValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstEntiteti);
 
         jLabel1.setText("Naziv računala");
+
+        txtNaziv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNazivActionPerformed(evt);
+            }
+        });
 
         txtOpis.setColumns(20);
         txtOpis.setRows(5);
@@ -83,12 +101,25 @@ public class RacunalaProzor extends javax.swing.JFrame {
         jLabel3.setText("Cijena");
 
         txtKreiraj.setText("Kreiraj");
+        txtKreiraj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKreirajActionPerformed(evt);
+            }
+        });
 
         txtPromijeni.setText("Promijeni");
+        txtPromijeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPromijeniActionPerformed(evt);
+            }
+        });
 
         txtObrisi.setText("Obriši");
-
-        jLabel4.setText("Narudžba");
+        txtObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,17 +137,14 @@ public class RacunalaProzor extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtNarudzba, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                                .addComponent(txtCijena, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtKreiraj)
                         .addGap(18, 18, 18)
                         .addComponent(txtPromijeni)
                         .addGap(18, 18, 18)
                         .addComponent(txtObrisi)))
-                .addGap(0, 219, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,27 +158,97 @@ public class RacunalaProzor extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNarudzba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtKreiraj)
                     .addComponent(txtPromijeni)
                     .addComponent(txtObrisi))
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNazivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNazivActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNazivActionPerformed
+
+    private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
+        if (evt.getValueIsAdjusting() || lstEntiteti.getSelectedValue() == null) {
+            return;
+        }
+        obrada.setEntitet(lstEntiteti.getSelectedValue());
+        var s = obrada.getEntitet();
+        txtNaziv.setText(s.getNaziv());
+        txtOpis.setText(s.getOpis());
+        txtCijena.setText(s.getCijena() != null ? nf.format(s.getCijena()) : " ");
+    }//GEN-LAST:event_lstEntitetiValueChanged
+
+    private void txtKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKreirajActionPerformed
+        try {
+            obrada.setEntitet(new Racunalo());
+            preuzmiVrijednost();
+            obrada.create();
+            ucitaj();
+
+        } catch (ZavrsniRadException e) {
+            JOptionPane.showMessageDialog(getRootPane(), e.getPoruka());
+        }
+    }//GEN-LAST:event_txtKreirajActionPerformed
+
+    private void txtPromijeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPromijeniActionPerformed
+        if(obrada.getEntitet()==null) {
+            JOptionPane.showMessageDialog(getRootPane(), "Molim vas odaberite stavku!");
+        }
+        preuzmiVrijednost();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (ZavrsniRadException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_txtPromijeniActionPerformed
+
+    private void txtObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtObrisiActionPerformed
+      if(obrada.getEntitet()==null) {
+            JOptionPane.showMessageDialog(getRootPane(), "Molim vas odaberite stavku!");
+        }
+      if (JOptionPane.showConfirmDialog(getRootPane(),
+                "Sigurno obrisati: \"" + obrada.getEntitet().getNaziv() + "\"?",
+                "Brisanje",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE)
+                == JOptionPane.NO_OPTION) {
+            return;
+        }
+      
+      try {
+            obrada.delete();
+            ucitaj();
+        } catch (ZavrsniRadException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_txtObrisiActionPerformed
+    private void preuzmiVrijednost() {
+        var s = obrada.getEntitet();
+        s.setNaziv(txtNaziv.getText());
+        s.setOpis(txtOpis.getText());
+        
+        
+
+        try {
+            s.setCijena(new BigDecimal(nf.parse(txtCijena.getText()).toString()));
+        } catch (Exception e) {
+            s.setCijena(BigDecimal.ZERO);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -159,16 +257,15 @@ public class RacunalaProzor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<Racunalo> lstEntiteti;
     private javax.swing.JTextField txtCijena;
     private javax.swing.JButton txtKreiraj;
-    private javax.swing.JTextField txtNarudzba;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JButton txtObrisi;
     private javax.swing.JTextArea txtOpis;
     private javax.swing.JButton txtPromijeni;
     // End of variables declaration//GEN-END:variables
+
 }

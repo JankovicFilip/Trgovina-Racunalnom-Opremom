@@ -69,9 +69,6 @@ public class PocetniInsert {
         s.setTrajanje((int) Math.random() * (200 - 100) + 100);
         s.setCijena(new BigDecimal(Math.random() * (10000 - 5000) + 5000));
          */
-       
-
-       
         session.getTransaction().commit();
 
     }
@@ -80,7 +77,7 @@ public class PocetniInsert {
 
         List<Kupac> kupci = new ArrayList<>();
         Kupac k;
-        for (int i = 0; i < 144; i++) {
+        for (int i = 0; i < 50; i++) {
             k = new Kupac();
             k.setIme(faker.name().firstName());
             k.setPrezime(faker.name().lastName());
@@ -107,26 +104,51 @@ public class PocetniInsert {
     private static List<Narudzba> generirajNarudzbe(Faker faker, Session session) {
         List<Kupac> kupci = generirajKupce(faker, session);
         List<Narudzba> narudzbe = new ArrayList<>();
+        List<Komponenta> komponente = genererirajKomponente(faker, session);
+        List<Racunalo> racunala = genererirajRacunala(faker, session);
         Narudzba n;
         Kupac k;
-        for (int i = 0; i < 144; i++) {
+        for (int j = 0; j < kupci.size() - 10; j++) {
+            k = kupci.get(j);
+            for (int i = 0; i < 50; i++) {
+                n = new Narudzba();
+                n.setDatumNarudzbe(new Date());
+                n.setDatumOtpreme(new Date());
+                n.setKupac(k);
+                Collections.shuffle(kupci);
+                Collections.shuffle(komponente);
+                Collections.shuffle(racunala);
+                n.setKomponente(new ArrayList<>());
+                for (int a = 0; a < ((int) Math.random() * (10 - 8) +2 ); a++) {
+                    n.getKomponente().add(komponente.get(a));
+                }
+                n.setRacunala(new ArrayList<>());
+                for (int b = 0; b < ((int) Math.random() * (10 - 8) + 2); b++) {
+                    n.getRacunala().add(racunala.get(b));
+                }
+                session.save(n);
+                narudzbe.add(n);
+                System.out.println("Kreirao narudzbu: " + n.getDatumNarudzbe());
+            }
+        }
+        /*for (int i = 0; i < 50; i++) {
             k = kupci.get(i);
             n = new Narudzba();
             n.setDatumNarudzbe(new Date());
             n.setDatumOtpreme(new Date());
             n.setKupac(k);
-            /*p.setPrezime(faker.name().lastName());
-            p.setEmail(faker.name().firstName().substring(0, 1).toLowerCase()
-                    + faker.name().lastName().toLowerCase().replace(" ", "")
-                    + "@edunova.hr");
+            Collections.shuffle(kupci);
+            Collections.shuffle(komponente);
+            Collections.shuffle(racunala);
+            n.setKomponente(new ArrayList<>());
+            n.getKomponente().add(komponente.get(i));
+            n.setRacunala(new ArrayList<>());
+            n.getRacunala().add(racunala.get(i));
 
-            p.setOib(EdunovaUtil.generirajOib());
-
-            p.setIban("");*/
             session.save(n);
             narudzbe.add(n);
             System.out.println("Kreirao narudzbu: " + n.getDatumNarudzbe());
-        }
+        }*/
 
         return narudzbe;
 
@@ -136,16 +158,14 @@ public class PocetniInsert {
 
         List<Komponenta> komponente = new ArrayList<>();
         Komponenta k;
-        List<Narudzba> narudzbe = generirajNarudzbe(faker, session);
-        Narudzba n;
-        for (int i = 0; i < 144; i++) {
-            n = narudzbe.get(i);
+
+        for (int i = 0; i < 50; i++) {
+
             k = new Komponenta();
+
             k.setNaziv(faker.book().title());
 
             k.setOpis(faker.harryPotter().quote());
-            k.setNarudzbe(new ArrayList<>());
-            k.getNarudzbe().add(n);
 
             k.setCijena(new BigDecimal(Math.random() * (10000 - 8000) + 5000));
 
@@ -162,18 +182,13 @@ public class PocetniInsert {
 
         List<Racunalo> racunala = new ArrayList<>();
         Racunalo r;
-        List<Narudzba> narudzbe = generirajNarudzbe(faker, session);
-        Narudzba n;
 
-        for (int i = 0; i < 144; i++) {
-            n = narudzbe.get(i);
+        for (int i = 0; i < 50; i++) {
+
             r = new Racunalo();
             r.setNaziv(faker.book().title());
-            /*k.setCertificiran(Math.random() < 0.5 ? true : false);
-            s.setTrajanje((int) Math.random() * (200 - 100) + 100);*/
+
             r.setOpis(faker.harryPotter().quote());
-            r.setNarudzbe(new ArrayList<>());
-            r.getNarudzbe().add(n);
 
             r.setCijena(new BigDecimal(Math.random() * (10000 - 2000) + 5000));
 

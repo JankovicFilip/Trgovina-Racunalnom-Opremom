@@ -42,6 +42,7 @@ public class ObradaRacunalo extends Obrada<Racunalo> {
                 sb.append(n.getSifra());
                 sb.append("\n");
             }
+            throw new ZavrsniRadException("Ne možete obrisati stavku jer za to računalo postoji narudžba!" + sb.toString());
         }
 
     }

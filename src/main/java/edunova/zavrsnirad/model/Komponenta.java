@@ -25,10 +25,7 @@ public class Komponenta extends Entitet{
     private String opis;
     private BigDecimal cijena;
     
-    @ManyToMany
-    @JoinTable(name = "komponenta_narudzba",
-            joinColumns = @JoinColumn(name = "komponenta"),
-            inverseJoinColumns = @JoinColumn(name = "narudzba"))
+    @ManyToMany(mappedBy = "komponente")
     private List<Narudzba> narudzbe;
 
     @Override
