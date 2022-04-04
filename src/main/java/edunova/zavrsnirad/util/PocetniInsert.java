@@ -6,7 +6,7 @@ package edunova.zavrsnirad.util;
 
 import com.github.javafaker.Faker;
 import edunova.zavrsnirad.model.Komponenta;
-import edunova.zavrsnirad.model.Kupac;
+import edunova.zavrsnirad.model.Korisnik;
 import edunova.zavrsnirad.model.Narudzba;
 import edunova.zavrsnirad.model.Operater;
 import edunova.zavrsnirad.model.Racunalo;
@@ -27,22 +27,15 @@ import org.mindrot.jbcrypt.BCrypt;
 public class PocetniInsert {
 
     public static void inicijalniPodaci() {
-        PocetniInsert.unosOperatera();
+        //PocetniInsert.unosKorisnika();
         PocetniInsert.izvedi();
     }
 
-    public static void unosOperatera() {
+    public static void unosKorisnika() {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
 
-        Operater o = new Operater();
-        o.setIme("Filip");
-        o.setPrezime("Janković");
-        o.setUloga("admin");
-        o.setEmail("filip.vno.jankovic@gmail.com");
-        o.setLozinka(BCrypt.hashpw("Lozinka", BCrypt.gensalt()));
-        session.save(o);
-        session.getTransaction().commit();
+        
 
     }
 
@@ -58,10 +51,10 @@ public class PocetniInsert {
         session.beginTransaction();
         Faker faker = new Faker();
 
-        List<Kupac> kupci = generirajKupce(faker, session);
+        //List<Korisnik> korisnici = generirajKorisnike(faker, session);
         List<Narudzba> narudzbe = generirajNarudzbe(faker, session);
-        List<Komponenta> komponente = genererirajKomponente(faker, session);
-        List<Racunalo> racunala = genererirajRacunala(faker, session);
+        //List<Komponenta> komponente = genererirajKomponente(faker, session);
+        //List<Racunalo> racunala = genererirajRacunala(faker, session);
 
         /* Smjer s = new Smjer();
         s.setNaziv(faker.book().title());
@@ -73,12 +66,12 @@ public class PocetniInsert {
 
     }
 
-    private static List<Kupac> generirajKupce(Faker faker, Session session) {
+    private static List<Korisnik> generirajKorisnike(Faker faker, Session session) {
 
-        List<Kupac> kupci = new ArrayList<>();
-        Kupac k;
+        List<Korisnik> korisnici = new ArrayList<>();
+        Korisnik k;
         for (int i = 0; i < 50; i++) {
-            k = new Kupac();
+            k = new Korisnik();
             k.setIme(faker.name().firstName());
             k.setPrezime(faker.name().lastName());
             k.setEmail(faker.name().firstName().substring(0, 1).toLowerCase()
@@ -88,34 +81,44 @@ public class PocetniInsert {
             k.setOib(OibUtil.generirajOib());
             k.setAdresa(faker.address().fullAddress());
             k.setBrojTelefona(faker.phoneNumber().phoneNumber());
+            k.setLozinka(BCrypt.hashpw(faker.animal().name(), BCrypt.gensalt()));
 
             k.setEmail(faker.name().firstName().substring(0, 1).toLowerCase()
                     + faker.name().lastName().toLowerCase().replace(" ", "")
                     + "@gmail.com");
+            k.setUloga("oper");
             session.save(k);
-            kupci.add(k);
-            System.out.println("Kreirao kupca: " + k.getIme() + k.getPrezime());
+            korisnici.add(k);
+            System.out.println("Kreirao korisnika: " + k.getIme() + k.getPrezime() + k.getSifra());
         }
+        k = new Korisnik();
+        k.setIme("Filip");
+        k.setPrezime("Janković");
+        k.setUloga("admin");
+        k.setEmail("filip.vno.jankovic@gmail.com");
+        k.setLozinka(BCrypt.hashpw("Lozinka", BCrypt.gensalt()));
+        session.save(k);
+        //session.getTransaction().commit();
 
-        return kupci;
+        return korisnici;
 
     }
 
     private static List<Narudzba> generirajNarudzbe(Faker faker, Session session) {
-        List<Kupac> kupci = generirajKupce(faker, session);
+        List<Korisnik> korisnici = generirajKorisnike(faker, session);
         List<Narudzba> narudzbe = new ArrayList<>();
         List<Komponenta> komponente = genererirajKomponente(faker, session);
         List<Racunalo> racunala = genererirajRacunala(faker, session);
         Narudzba n;
-        Kupac k;
-        for (int j = 0; j < kupci.size() - 25; j++) {
-            k = kupci.get(j);
+        Korisnik k;
+        for (int j = 0; j < korisnici.size() - 2; j++) {
+            k = korisnici.get(j);
             for (int i = 0; i < 10; i++) {
                 n = new Narudzba();
                 n.setDatumNarudzbe(new Date());
                 n.setDatumOtpreme(new Date());
-                n.setKupac(k);
-                Collections.shuffle(kupci);
+                n.setKorisnik(k);
+                Collections.shuffle(korisnici);
                 Collections.shuffle(komponente);
                 Collections.shuffle(racunala);
                 n.setKomponente(new ArrayList<>());
@@ -128,7 +131,7 @@ public class PocetniInsert {
                 }
                 session.save(n);
                 narudzbe.add(n);
-                System.out.println("Kreirao narudzbu: " + n.getDatumNarudzbe());
+                System.out.println("Kreirao narudzbu: " + n.getSifra());
             }
         }
         /*for (int i = 0; i < 50; i++) {
@@ -171,7 +174,7 @@ public class PocetniInsert {
 
             session.save(k);
             komponente.add(k);
-            System.out.println("Kreirao komponentu: " + k.getNaziv());
+            System.out.println("Kreirao komponentu: " + k.getNaziv() + k.getSifra());
         }
 
         return komponente;
@@ -194,7 +197,7 @@ public class PocetniInsert {
 
             session.save(r);
             racunala.add(r);
-            System.out.println("Kreirao racunalo: " + r.getNaziv());
+            System.out.println("Kreirao racunalo: " + r.getNaziv() + r.getSifra());
         }
 
         return racunala;

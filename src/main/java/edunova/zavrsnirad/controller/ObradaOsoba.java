@@ -10,6 +10,7 @@ import edunova.zavrsnirad.util.OibValidation;
 import edunova.zavrsnirad.util.PrezimeValidation;
 import edunova.zavrsnirad.util.ZavrsniRadException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -26,11 +27,14 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
         kontrolaOib();
         kontrolaIme();
         kontrolaPrezime();
+        kontrolaNoviEmail();
     }
     @Override
     protected void kontrolaUpdate() throws ZavrsniRadException{
         kontrolaEmail();
         kontrolaOib();
+        kontrolaIme();
+        kontrolaPrezime();
     }
     
     @Override
@@ -41,6 +45,7 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
     
 
     private void kontrolaEmail() throws ZavrsniRadException{
+        
         try {
             InternetAddress emailAddr = new InternetAddress(entitet.getEmail());
             emailAddr.validate();
@@ -71,8 +76,8 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
     }
 
     private void kontrolaPrezime() throws ZavrsniRadException{
-        char[] nedozvoljeno = {'1','2','3','4','5','6','7','8','9','0',',','.','/','<','>','?',':',';','"','\'','\\','|',
-       '{','[','}',']','=','+','-','_','!','@','#','$','%','^','&','*','(',')','`','~','€'};
+        char[] nedozvoljeno = {'1','2','3','4','5','6','7','8','9','0',',','.','/','<','>','?',':',';','"','\\','|',
+       '{','[','}',']','=','+','_','!','@','#','$','%','^','&','*','(',')','`','~','€'};
        if(entitet.getPrezime()!=null){
            for(int i=0;i<entitet.getPrezime().length();i++){
                for(char c: nedozvoljeno){
@@ -84,6 +89,19 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
            }
        }
     }
+
+    private void kontrolaNoviEmail() throws ZavrsniRadException{
+        List<Osoba> osobe = session.createQuery("from Osoba o "
+                + "where o.email=:email")
+                .setParameter("email", entitet.getEmail()).list();
+        
+        if (osobe != null && osobe.size() > 0) {
+            throw new ZavrsniRadException("Email se već koristi!");
+        }
+        
+    }
+
+    
     
    
     

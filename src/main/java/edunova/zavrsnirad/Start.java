@@ -4,13 +4,13 @@
  */
 package edunova.zavrsnirad;
 
-import edunova.zavrsnirad.model.Kupac;
+import edunova.zavrsnirad.model.Korisnik;
 import java.util.Scanner;
 import org.hibernate.Session;
 import edunova.zavrsnirad.util.Unos;
 import edunova.zavrsnirad.util.ZavrsniRadException;
 import edunova.zavrsnirad.controller.Obrada;
-import edunova.zavrsnirad.controller.ObradaKupac;
+import edunova.zavrsnirad.controller.ObradaKorisnik;
 import edunova.zavrsnirad.controller.ObradaOsoba;
 import edunova.zavrsnirad.model.Osoba;
 import edunova.zavrsnirad.util.HibernateUtil;
@@ -25,7 +25,7 @@ public class Start {
 
     private Session session;
     //private Osoba osoba;
-    private Kupac kupac;
+    private Korisnik kupac;
     private Scanner ulaz;
 
     public Start() {
@@ -38,11 +38,11 @@ public class Start {
     }
 
     public void unos() {
-        Kupac k = new Kupac();
+        Korisnik k = new Korisnik();
         //o.setSifra(Unos.unesiLong(ulaz, "Molim vas unesite sifru!"));
         /*k.setEmail(Unos.unesiString(ulaz, "Koji je vas email?"));
         k.setOib(Unos.unesiString(ulaz, "Koji je vas oib?"));*/
-        ObradaKupac ok = new ObradaKupac();
+        ObradaKorisnik ok = new ObradaKorisnik();
         ok.setEntitet(k);
         /*k.setIme(Unos.unesiString(ulaz, "Koje je Vase ime?"));
 

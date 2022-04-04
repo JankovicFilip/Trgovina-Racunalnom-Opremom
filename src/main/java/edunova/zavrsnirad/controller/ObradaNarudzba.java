@@ -4,7 +4,7 @@
  */
 package edunova.zavrsnirad.controller;
 
-import edunova.zavrsnirad.model.Kupac;
+import edunova.zavrsnirad.model.Korisnik;
 import edunova.zavrsnirad.model.Narudzba;
 import edunova.zavrsnirad.util.ZavrsniRadException;
 import java.util.Calendar;

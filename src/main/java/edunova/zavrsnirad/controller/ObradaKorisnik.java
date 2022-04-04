@@ -8,17 +8,37 @@ package edunova.zavrsnirad.controller;
  *
  * @author Admin
  */
-import edunova.zavrsnirad.model.Kupac;
+import edunova.zavrsnirad.model.Korisnik;
 import edunova.zavrsnirad.util.TelefonValidation;
 import edunova.zavrsnirad.util.ZavrsniRadException;
 import java.util.Arrays;
 import java.util.List;
+import javax.persistence.NoResultException;
+import org.mindrot.jbcrypt.BCrypt;
 
-public class ObradaKupac extends ObradaOsoba<Kupac> {
+public class ObradaKorisnik extends ObradaOsoba<Korisnik> {
 
     @Override
-    public List<Kupac> read() {
-        return session.createQuery("from Kupac").list();
+    public List<Korisnik> read() {
+        return session.createQuery("from Korisnik").list();
+    }
+    
+    public Korisnik autoriziraj(String email, String lozinka) {
+        Korisnik korisnik = null;
+        try {
+            korisnik = (Korisnik) session.createQuery("from Korisnik where email=:email")
+                    .setParameter("email", email).getSingleResult();
+
+        } catch (NoResultException e) {
+            return null;
+
+        }
+        if(korisnik==null) {
+            return null;
+        }
+        return BCrypt.checkpw(lozinka, korisnik.getLozinka()) ? korisnik : null;
+        
+
     }
 
     @Override
@@ -26,6 +46,8 @@ public class ObradaKupac extends ObradaOsoba<Kupac> {
         super.kontrolaCreate();
         kontrolaAdresa();
         kontrolaBrojTelefona();
+        kontrolaLozinka();
+        
     }
 
     @Override
@@ -65,5 +87,19 @@ public class ObradaKupac extends ObradaOsoba<Kupac> {
             throw new ZavrsniRadException("Broj telefona ne smije biti prazan!!");
         }
     }
+
+    private void kontrolaLozinka() throws ZavrsniRadException{
+        if(entitet.getLozinka() == null || entitet.getLozinka().trim().isEmpty()){
+            throw new ZavrsniRadException("Lozinka ne smije biti prazna!");
+        }
+        if(entitet.getLozinka().trim().length()<8) {
+            throw new ZavrsniRadException("Lozinka mora imati minimalno 8 znakova!");
+        }
+        if(entitet.getLozinka().trim().length()>20) {
+            throw new ZavrsniRadException("Lozinka može imati maksimalno 20 znakova!");
+        }
+    }
+
+    
 
 }

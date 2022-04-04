@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -17,8 +17,8 @@ import javax.persistence.OneToOne;
 @Entity
 public class Narudzba extends Entitet {
 
-    @OneToOne
-    private Kupac kupac;
+    @ManyToOne
+    private Korisnik korisnik;
 
     private Date datumNarudzbe;
 
@@ -27,6 +27,14 @@ public class Narudzba extends Entitet {
     private List<Racunalo> racunala;
     @ManyToMany
     private List<Komponenta> komponente;
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
+    }
 
     public List<Komponenta> getKomponente() {
         return komponente;
@@ -53,13 +61,7 @@ public class Narudzba extends Entitet {
     
     
 
-    public Kupac getKupac() {
-        return kupac;
-    }
-
-    public void setKupac(Kupac kupac) {
-        this.kupac = kupac;
-    }
+   
 
     
 
