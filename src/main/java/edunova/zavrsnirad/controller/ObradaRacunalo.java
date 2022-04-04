@@ -25,6 +25,8 @@ public class ObradaRacunalo extends Obrada<Racunalo> {
         kontrolaNaziv();
         kontrolaOpis();
         kontrolaCijena();
+        //kontrolaNarudzba();
+        kontrolaNoviNaziv();
     }
 
     @Override
@@ -32,6 +34,7 @@ public class ObradaRacunalo extends Obrada<Racunalo> {
         kontrolaNaziv();
         kontrolaOpis();
         kontrolaCijena();
+        kontrolaPromjenaNaziva();
     }
 
     @Override
@@ -68,12 +71,52 @@ public class ObradaRacunalo extends Obrada<Racunalo> {
     }
 
     private void kontrolaCijena() throws ZavrsniRadException{
-        if(entitet.getCijena()==null
-                || entitet.getCijena().compareTo(BigDecimal.ZERO)>0
-                || entitet.getCijena().compareTo(new BigDecimal(30000))>0) {
-            throw new ZavrsniRadException("Cijena more biti veca od 0 i manja od 30000!");
+        if(entitet.getCijena()==null) {
+            throw new ZavrsniRadException("Cijena ne smije biti prazna!");
         }
+        if(entitet.getCijena().compareTo(BigDecimal.ZERO)<=0) {
+            throw new ZavrsniRadException("Cijena mora biti pozitivan broj!");
+        }
+        if(entitet.getCijena().compareTo(new BigDecimal(30000))>0) {
+            throw new ZavrsniRadException("Cijena mora biti manja od 30000!");
+        }
+                //|| entitet.getCijena().compareTo(BigDecimal.ZERO)>0
+                //|| entitet.getCijena().compareTo(new BigDecimal(30000))>0) {
+            //throw new ZavrsniRadException("Cijena more biti veca od 0 i manja od 30000!");
+        //}
         
     }
 
+    /*private void kontrolaNarudzba() throws ZavrsniRadException{
+        if(entitet.getNarudzbe()!=null || entitet.getNarudzbe().size()>0) {
+            StringBuilder sb = new StringBuilder();
+            for(Narudzba n : entitet.getNarudzbe()) {
+                sb.append(n.getSifra());
+                sb.append("\n");
+            }
+            throw new ZavrsniRadException("Ne možete obrisati stavku jer za to računalo postoji narudžba!" + sb.toString());
+        }
+        
+    }*/
+    
+    private void kontrolaNoviNaziv() throws ZavrsniRadException{
+        List<Racunalo> racunala = session.createQuery("from Racunalo r "
+                + "where r.naziv=:naziv")
+                .setParameter("naziv", entitet.getNaziv()).list();
+                
+                if(racunala!=null  && racunala.size()>0) {
+                    throw new ZavrsniRadException("Naziv tog računala već postoji, molim Vas odaberite drugi naziv!");
+                }
+    }
+
+    private void kontrolaPromjenaNaziva() throws ZavrsniRadException{
+        List<Racunalo> racunala = session.createQuery("from Racunalo r "
+                + "where r.naziv=:naziv and r.sifra!=:sifra")
+                .setParameter("naziv", entitet.getNaziv())
+                .setParameter("sifra", entitet.getSifra()).list();
+        
+        if(racunala!=null && racunala.size()>0) {
+            throw new ZavrsniRadException("Naziv tog računala već postoji, molim Vas odaberite drugi naziv!");
+        }
+    }
 }

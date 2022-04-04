@@ -10,15 +10,20 @@ package edunova.zavrsnirad.util;
  */
 public class ZavrsniRadException extends Exception{
     private String poruka;
-    
-    public ZavrsniRadException(String poruke) {
-        super();
-        this.poruka = poruka;
-    }
 
     public String getPoruka() {
         return poruka;
     }
+
+    public ZavrsniRadException(String poruka) {
+        super();
+        this.poruka = poruka;
+    }
+
+    
+    
+    
+    
 
     
     

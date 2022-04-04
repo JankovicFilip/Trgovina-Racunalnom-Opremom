@@ -108,9 +108,9 @@ public class PocetniInsert {
         List<Racunalo> racunala = genererirajRacunala(faker, session);
         Narudzba n;
         Kupac k;
-        for (int j = 0; j < kupci.size() - 10; j++) {
+        for (int j = 0; j < kupci.size() - 25; j++) {
             k = kupci.get(j);
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 10; i++) {
                 n = new Narudzba();
                 n.setDatumNarudzbe(new Date());
                 n.setDatumOtpreme(new Date());

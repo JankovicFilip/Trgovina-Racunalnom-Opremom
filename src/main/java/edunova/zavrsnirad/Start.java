@@ -85,8 +85,8 @@ public class Start {
 
     public static void main(String[] args) {
         //new Start();
-        PocetniInsert.inicijalniPodaci();
-        //new edunova.zavrsnirad.view.SplashScreen().setVisible(true);
+        //PocetniInsert.inicijalniPodaci();
+        new edunova.zavrsnirad.view.SplashScreen().setVisible(true);
     }
 
 }

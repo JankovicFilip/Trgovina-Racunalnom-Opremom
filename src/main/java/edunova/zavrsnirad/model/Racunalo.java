@@ -5,11 +5,10 @@
 package edunova.zavrsnirad.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
@@ -26,10 +25,10 @@ public class Racunalo extends Entitet{
     private BigDecimal cijena;
     
     @ManyToMany(mappedBy = "racunala")
-    private List<Narudzba> narudzbe;
+    private List<Narudzba> narudzbe = new ArrayList<>();
 
     
-    @Override
+    //@Override;
     public String toString() {
         return naziv;
     }

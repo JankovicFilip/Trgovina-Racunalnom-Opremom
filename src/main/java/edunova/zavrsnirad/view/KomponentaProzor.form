@@ -99,14 +99,14 @@
             <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstEntitetiValueChanged"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Racunalo&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Komponenta&gt;"/>
           </AuxValues>
         </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Naziv ra&#x10d;unala"/>
+        <Property name="text" type="java.lang.String" value="Naziv komponente"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNaziv">
@@ -132,7 +132,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Opis ra&#x10d;unala"/>
+        <Property name="text" type="java.lang.String" value="Opis komponente"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

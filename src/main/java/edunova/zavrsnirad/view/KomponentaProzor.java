@@ -4,8 +4,8 @@
  */
 package edunova.zavrsnirad.view;
 
-import edunova.zavrsnirad.controller.ObradaRacunalo;
-import edunova.zavrsnirad.model.Racunalo;
+import edunova.zavrsnirad.controller.ObradaKomponenta;
+import edunova.zavrsnirad.model.Komponenta;
 import edunova.zavrsnirad.util.OperaterUtil;
 import edunova.zavrsnirad.util.ZavrsniRadException;
 import java.math.BigDecimal;
@@ -20,30 +20,30 @@ import javax.swing.JOptionPane;
  *
  * @author Admin
  */
-public class RacunalaProzor extends javax.swing.JFrame {
+public class KomponentaProzor extends javax.swing.JFrame {
 
-    private ObradaRacunalo obrada;
+    private ObradaKomponenta obrada;
     private DecimalFormat nf;
 
     /**
      * Creates new form RacunalaProzor
      */
-    public RacunalaProzor() {
+    public KomponentaProzor() {
         initComponents();
-        obrada = new ObradaRacunalo();
+        obrada = new ObradaKomponenta();
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("hr", "HR"));
         nf = new DecimalFormat("###,###.00", symbols);
-        setTitle(OperaterUtil.getNaslov("Računala"));
+        setTitle(OperaterUtil.getNaslov("Komponente"));
         ucitaj();
     }
 
     private void ucitaj() {
-        DefaultListModel<Racunalo> racunala = new DefaultListModel<>();
-        List<Racunalo> entiteti = obrada.read();
-        for (Racunalo r : entiteti) {
-            racunala.addElement(r);
+        DefaultListModel<Komponenta> komponente = new DefaultListModel<>();
+        List<Komponenta> entiteti = obrada.read();
+        for (Komponenta k : entiteti) {
+            komponente.addElement(k);
         }
-        lstEntiteti.setModel(racunala);
+        lstEntiteti.setModel(komponente);
     }
 
     /**
@@ -78,7 +78,7 @@ public class RacunalaProzor extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstEntiteti);
 
-        jLabel1.setText("Naziv računala");
+        jLabel1.setText("Naziv komponente");
 
         txtNaziv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +91,7 @@ public class RacunalaProzor extends javax.swing.JFrame {
         txtOpis.setRows(5);
         jScrollPane2.setViewportView(txtOpis);
 
-        jLabel2.setText("Opis računala");
+        jLabel2.setText("Opis komponente");
 
         jLabel3.setText("Cijena");
 
@@ -190,7 +190,7 @@ public class RacunalaProzor extends javax.swing.JFrame {
     private void btnKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajActionPerformed
         try {
             //if (obrada.getEntitet() == null) {
-            obrada.setEntitet(new Racunalo());
+            obrada.setEntitet(new Komponenta());
             //}
             preuzmiVrijednost();
             obrada.create();
@@ -271,7 +271,7 @@ public class RacunalaProzor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<Racunalo> lstEntiteti;
+    private javax.swing.JList<Komponenta> lstEntiteti;
     private javax.swing.JTextField txtCijena;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextArea txtOpis;

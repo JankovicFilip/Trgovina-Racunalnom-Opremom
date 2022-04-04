@@ -97,6 +97,11 @@ public class Izbornik extends javax.swing.JFrame {
         jMenu1.add(jmiRacunala);
 
         jmiKomponente.setText("Komponente");
+        jmiKomponente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiKomponenteActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmiKomponente);
 
         jmiNarudzbe.setText("Narudzbe");
@@ -122,6 +127,7 @@ public class Izbornik extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
@@ -131,6 +137,10 @@ public class Izbornik extends javax.swing.JFrame {
     private void jmiRacunalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRacunalaActionPerformed
         new RacunalaProzor().setVisible(true);
     }//GEN-LAST:event_jmiRacunalaActionPerformed
+
+    private void jmiKomponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKomponenteActionPerformed
+        new KomponentaProzor().setVisible(true);
+    }//GEN-LAST:event_jmiKomponenteActionPerformed
 
     /**
      * @param args the command line arguments
