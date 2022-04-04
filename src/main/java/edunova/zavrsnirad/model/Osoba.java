@@ -19,6 +19,13 @@ public class Osoba extends Entitet{
     private String email;
     @Column(columnDefinition = "char (11)")
     private String oib;
+    
+    
+    @Override
+    public String toString() {
+        return ime + " " + prezime;
+    }
+
 
     public String getIme() {
         return ime;

@@ -4,7 +4,9 @@
  */
 package edunova.zavrsnirad.view;
 
+import edunova.zavrsnirad.controller.ObradaKorisnik;
 import edunova.zavrsnirad.controller.ObradaOperater;
+import edunova.zavrsnirad.model.Korisnik;
 import edunova.zavrsnirad.model.Operater;
 import edunova.zavrsnirad.util.OperaterUtil;
 import java.awt.Color;
@@ -18,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class Autorizacija extends javax.swing.JFrame {
-    private ObradaOperater obradaOperater;
+    private ObradaKorisnik obradaKorisnik;
 
     /**
      * Creates new form Autorizacija
@@ -30,7 +32,7 @@ public class Autorizacija extends javax.swing.JFrame {
         
     }
     private void postavke(){
-        obradaOperater = new ObradaOperater();
+        obradaKorisnik = new ObradaKorisnik();
         txtEmail.setText("Filip.vno.jankovic@gmail.com");
         txtLozinka.setText("Lozinka");
         setTitle(OperaterUtil.getNaslov("Autorizacija"));
@@ -220,13 +222,13 @@ public class Autorizacija extends javax.swing.JFrame {
             txtEmail.requestFocus();
             return;
         }
-         Operater operater = obradaOperater.autoriziraj(txtEmail.getText(), new String(txtLozinka.getPassword()));
-        if(operater==null) {
+         Korisnik korisnik = obradaKorisnik.autoriziraj(txtEmail.getText(), new String(txtLozinka.getPassword()));
+        if(korisnik==null) {
             JOptionPane.showMessageDialog(getRootPane(), "Neispravna kombinacija emaila i lozinke!");
             return;
         } 
         
-        OperaterUtil.operater=operater;
+        OperaterUtil.korisnik=korisnik;
         
         new Izbornik().setVisible(true);
         dispose();

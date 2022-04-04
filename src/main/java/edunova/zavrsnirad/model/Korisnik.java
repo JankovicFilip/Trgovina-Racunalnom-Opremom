@@ -23,6 +23,9 @@ public class Korisnik extends Osoba{
     @OneToMany(mappedBy = "korisnik")
     private List<Narudzba> narudzbe;
 
+   
+
+    
     public String getLozinka() {
         return lozinka;
     }

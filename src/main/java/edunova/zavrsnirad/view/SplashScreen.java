@@ -4,6 +4,7 @@
  */
 package edunova.zavrsnirad.view;
 
+import edunova.zavrsnirad.controller.ObradaKorisnik;
 import edunova.zavrsnirad.controller.ObradaOperater;
 import edunova.zavrsnirad.util.HibernateUtil;
 import edunova.zavrsnirad.util.PocetniInsert;
@@ -64,7 +65,7 @@ public class SplashScreen extends javax.swing.JFrame {
         public void run() {
             Session s = HibernateUtil.getSession();
             if (s.getMetamodel().getEntities().size() > 0) {
-                if (new ObradaOperater().read().isEmpty()) {
+                if (new ObradaKorisnik().read().isEmpty()) {
                     PocetniInsert.inicijalniPodaci();
                 }
                 hibernateGotov = true;

@@ -105,6 +105,11 @@ public class Izbornik extends javax.swing.JFrame {
         jMenu1.add(jmiKomponente);
 
         jmiNarudzbe.setText("Narudzbe");
+        jmiNarudzbe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNarudzbeActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmiNarudzbe);
 
         jMenuBar1.add(jMenu1);
@@ -141,6 +146,10 @@ public class Izbornik extends javax.swing.JFrame {
     private void jmiKomponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKomponenteActionPerformed
         new KomponentaProzor().setVisible(true);
     }//GEN-LAST:event_jmiKomponenteActionPerformed
+
+    private void jmiNarudzbeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNarudzbeActionPerformed
+        new NarudzbaProzor().setVisible(true);
+    }//GEN-LAST:event_jmiNarudzbeActionPerformed
 
     /**
      * @param args the command line arguments

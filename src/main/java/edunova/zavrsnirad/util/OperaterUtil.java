@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edunova.zavrsnirad.util;
+import edunova.zavrsnirad.model.Korisnik;
 import edunova.zavrsnirad.model.Operater;
 
 /**
@@ -10,16 +11,16 @@ import edunova.zavrsnirad.model.Operater;
  * @author Admin
  */
 public class OperaterUtil {
-    public static Operater operater;
+    public static Korisnik korisnik;
     public static final String NAZIV_APP = "Edunova app";
     
     
     public static String getNaslov(String naslov) {
-        if (OperaterUtil.operater == null) {
+        if (OperaterUtil.korisnik == null) {
             return OperaterUtil.NAZIV_APP + " " + naslov;
         }
-        return OperaterUtil.NAZIV_APP + " " + naslov + " " + OperaterUtil.operater.getIme() + " "
-                + OperaterUtil.operater.getPrezime() + " " + OperaterUtil.operater.getUloga();
+        return OperaterUtil.NAZIV_APP + " " + naslov + " " + OperaterUtil.korisnik.getIme() + " "
+                + OperaterUtil.korisnik.getPrezime() + " " + OperaterUtil.korisnik.getUloga();
 
     }
 }
