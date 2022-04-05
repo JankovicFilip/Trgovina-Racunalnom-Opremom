@@ -12,6 +12,9 @@ import edunova.zavrsnirad.model.Komponenta;
 import edunova.zavrsnirad.model.Korisnik;
 import edunova.zavrsnirad.model.Narudzba;
 import edunova.zavrsnirad.model.Racunalo;
+import java.time.ZoneId;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -41,6 +44,34 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
         
     }
     
+    private void preuzmiVrijednosti(){
+        var e = obradaNarudzba.getEntitet();
+        e.setKorisnik((Korisnik) cmbKorisnik.getSelectedItem());
+        if (dpDatumNarudzbe.getDate() != null) {
+            e.setDatumNarudzbe(
+                    Date.from(
+                            dpDatumNarudzbe.getDate().atStartOfDay().atZone(
+                                    ZoneId.systemDefault()
+                            ).toInstant()
+                    )
+            );
+        } else {
+            e.setDatumNarudzbe(null);
+        }
+        if (dpDatumOtpreme.getDate() != null) {
+            e.setDatumOtpreme(
+                    Date.from(
+                            dpDatumOtpreme.getDate().atStartOfDay().atZone(
+                                    ZoneId.systemDefault()
+                            ).toInstant()
+                    )
+            );
+        } else {
+            e.setDatumOtpreme(null);
+        }
+        lblBrojNarudzbe.setText(String.valueOf(e.getSifra()));
+    }
+    
     private void ucitajNarudzbe(){
         DefaultListModel<Narudzba> narudzbe = new DefaultListModel<>();
         List<Narudzba> entiteti = obradaNarudzba.read();
@@ -68,10 +99,23 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
     }
     
     private void ucitajRacunala() {
-        DefaultListModel<Racunalo> mr = new DefaultListModel<>();
-        List<Racunalo> entiteti;
+        DefaultListModel<Racunalo> racunala = new DefaultListModel<>();
+        List<Racunalo> entiteti = obradaRacunalo.read();
+        for (Racunalo r : entiteti) {
+            racunala.addElement(r);
+        }
+        lstSvaRacunala.setModel(racunala);
         
         
+    }
+    
+    private void ucitajKomponente(){
+        DefaultListModel<Komponenta> komponente = new DefaultListModel<>();
+        List<Komponenta> entiteti = obradaKomponenta.read();
+        for (Komponenta k : entiteti) {
+            komponente.addElement(k);
+        }
+        lstSveKomponente.setModel(komponente);
     }
 
     /**
@@ -87,20 +131,20 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
         lstEntiteti = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         dpDatumNarudzbe = new com.github.lgooddatepicker.components.DatePicker();
-        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        dpDatumOtpreme = new com.github.lgooddatepicker.components.DatePicker();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cmbKorisnik = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        lstRacunalaNaNarudzbi = new javax.swing.JList<>();
         btnDodajRacunalo = new javax.swing.JButton();
         btnMakniRacunalo = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        lstSvaRacunala = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<>();
+        lstSveKomponente = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList5 = new javax.swing.JList<>();
+        lstKomponentaNaNarudzbi = new javax.swing.JList<>();
         btnDodajKomponentu = new javax.swing.JButton();
         btnMakniKomponentu = new javax.swing.JButton();
         lblBrojNarudzbe = new javax.swing.JLabel();
@@ -123,7 +167,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
 
         jLabel3.setText("Korisnik");
 
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(lstRacunalaNaNarudzbi);
 
         btnDodajRacunalo.setText(" <<");
 
@@ -134,11 +178,11 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane3.setViewportView(jList3);
+        jScrollPane3.setViewportView(lstSvaRacunala);
 
-        jScrollPane4.setViewportView(jList4);
+        jScrollPane4.setViewportView(lstSveKomponente);
 
-        jScrollPane5.setViewportView(jList5);
+        jScrollPane5.setViewportView(lstKomponentaNaNarudzbi);
 
         btnDodajKomponentu.setText(" <<");
 
@@ -172,7 +216,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(dpDatumNarudzbe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(datePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dpDatumOtpreme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbKorisnik, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -180,23 +224,20 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
                     .addComponent(lblBrojNarudzbe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDodajKomponentu)
-                            .addComponent(btnMakniKomponentu)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnMakniRacunalo)
-                            .addComponent(btnDodajRacunalo))))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDodajKomponentu)
+                    .addComponent(btnMakniKomponentu)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnMakniRacunalo)
+                        .addComponent(btnDodajRacunalo)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +253,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dpDatumOtpreme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -237,7 +278,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
                                     .addGap(136, 136, 136)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -247,7 +288,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
                             .addComponent(btnKreiraj)
                             .addComponent(btnPromjeni)
                             .addComponent(btnObrisi))))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -279,15 +320,11 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JComboBox<Korisnik> cmbKorisnik;
-    private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private com.github.lgooddatepicker.components.DatePicker dpDatumNarudzbe;
+    private com.github.lgooddatepicker.components.DatePicker dpDatumOtpreme;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<Racunalo> jList2;
-    private javax.swing.JList<Racunalo> jList3;
-    private javax.swing.JList<Komponenta> jList4;
-    private javax.swing.JList<Komponenta> jList5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -295,5 +332,9 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblBrojNarudzbe;
     private javax.swing.JList<Narudzba> lstEntiteti;
+    private javax.swing.JList<Komponenta> lstKomponentaNaNarudzbi;
+    private javax.swing.JList<Racunalo> lstRacunalaNaNarudzbi;
+    private javax.swing.JList<Racunalo> lstSvaRacunala;
+    private javax.swing.JList<Komponenta> lstSveKomponente;
     // End of variables declaration//GEN-END:variables
 }

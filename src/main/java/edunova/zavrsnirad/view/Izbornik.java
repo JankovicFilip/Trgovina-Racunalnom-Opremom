@@ -65,6 +65,8 @@ public class Izbornik extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jmiRacunala = new javax.swing.JMenuItem();
         jmiKomponente = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jmiNarudzbaISveUNjoj = new javax.swing.JMenuItem();
         jmiNarudzbe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,15 +106,27 @@ public class Izbornik extends javax.swing.JFrame {
         });
         jMenu1.add(jmiKomponente);
 
-        jmiNarudzbe.setText("Narudzbe");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Narudžbe");
+
+        jmiNarudzbaISveUNjoj.setText("Narudžba");
+        jmiNarudzbaISveUNjoj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNarudzbaISveUNjojActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiNarudzbaISveUNjoj);
+
+        jmiNarudzbe.setText("Sve narudžbe");
         jmiNarudzbe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiNarudzbeActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiNarudzbe);
+        jMenu2.add(jmiNarudzbe);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -151,6 +165,10 @@ public class Izbornik extends javax.swing.JFrame {
         new NarudzbaProzor().setVisible(true);
     }//GEN-LAST:event_jmiNarudzbeActionPerformed
 
+    private void jmiNarudzbaISveUNjojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNarudzbaISveUNjojActionPerformed
+        new NarudzbaTehnologijaProzor().setVisible(true);
+    }//GEN-LAST:event_jmiNarudzbaISveUNjojActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -158,11 +176,13 @@ public class Izbornik extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu jmAplikacija;
     private javax.swing.JMenuItem jmiExit;
     private javax.swing.JMenuItem jmiKomponente;
+    private javax.swing.JMenuItem jmiNarudzbaISveUNjoj;
     private javax.swing.JMenuItem jmiNarudzbe;
     private javax.swing.JMenuItem jmiRacunala;
     private javax.swing.JLabel lblVrijeme;
