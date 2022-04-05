@@ -45,39 +45,10 @@ public class NarudzbaProzor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstEntiteti = new javax.swing.JList<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtRacunaloNaziv = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtKomponentaNaziv = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblNardudzba = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        lstEntiteti.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstEntitetiValueChanged(evt);
-            }
-        });
-        jScrollPane1.setViewportView(lstEntiteti);
-
-        jLabel1.setText("Naziv računala");
-
-        jLabel2.setText("Naziv komponente");
-
-        txtRacunaloNaziv.setColumns(20);
-        txtRacunaloNaziv.setLineWrap(true);
-        txtRacunaloNaziv.setRows(5);
-        jScrollPane2.setViewportView(txtRacunaloNaziv);
-
-        txtKomponentaNaziv.setColumns(20);
-        txtKomponentaNaziv.setLineWrap(true);
-        txtKomponentaNaziv.setRows(5);
-        jScrollPane3.setViewportView(txtKomponentaNaziv);
 
         tblNardudzba.setAutoCreateRowSorter(true);
         tblNardudzba.setModel(new javax.swing.table.DefaultTableModel(
@@ -85,10 +56,11 @@ public class NarudzbaProzor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Kupac", "Komponenta", "Računalo", "Datum narudžbe", "Datum otpreme"
+                "Broj narudžbe", "Ime i prezime korisnika", "Komponenta", "Računalo"
             }
         ));
         tblNardudzba.setColumnSelectionAllowed(true);
+        tblNardudzba.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblNardudzba.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(tblNardudzba);
         tblNardudzba.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -99,62 +71,20 @@ public class NarudzbaProzor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 405, Short.MAX_VALUE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(140, 140, 140)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addGap(44, 44, 44))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane4)
-                        .addContainerGap())))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(203, 203, 203))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
-        /*if (evt.getValueIsAdjusting() || lstEntiteti.getSelectedValue() == null) {
-            return;
-        }
-        obrada = new ObradaNarudzba();
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("hr", "HR"));
-        nf = new DecimalFormat("###,###.00", symbols);
-        setTitle(OperaterUtil.getNaslov("Narudžbe"));
-        
-        ucitaj();*/
-        
-
-    }//GEN-LAST:event_lstEntitetiValueChanged
     
     private void ucitaj() {
         table = (DefaultTableModel) tblNardudzba.getModel();
@@ -162,12 +92,13 @@ public class NarudzbaProzor extends javax.swing.JFrame {
         
         
         for (Narudzba n : entiteti) {
-            Object[] o = new Object[5];
-            o[0] = n.getKorisnik().getIme();
-            o[1] = n.getKomponente();
-            o[2] = n.getRacunala();
-            o[3] = n.getDatumNarudzbe();
-            o[4] = n.getDatumOtpreme();
+            Object[] o = new Object[4];
+            o[0] = n.getSifra();
+            o[1] = n.getKorisnik().toString();            
+            o[2] = n.getKomponente();
+            o[3] = n.getRacunala();
+            
+            
             
             table.addRow(o);
         }
@@ -189,16 +120,8 @@ public class NarudzbaProzor extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JList<Narudzba> lstEntiteti;
     private javax.swing.JTable tblNardudzba;
-    private javax.swing.JTextArea txtKomponentaNaziv;
-    private javax.swing.JTextArea txtRacunaloNaziv;
     // End of variables declaration//GEN-END:variables
 
 }
