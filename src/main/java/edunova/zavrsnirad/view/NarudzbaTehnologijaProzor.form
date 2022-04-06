@@ -49,9 +49,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane5" min="-2" pref="205" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnDodajKomponentu" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnMakniKomponentu" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnMakniKomponentu" max="32767" attributes="0"/>
+                          <Component id="btnDodajKomponentu" pref="49" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -260,6 +260,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value=" &lt;&lt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDodajRacunaloActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnMakniRacunalo">
       <Properties>

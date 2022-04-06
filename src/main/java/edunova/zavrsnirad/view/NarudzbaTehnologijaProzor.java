@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
-
+    
     ObradaNarudzba obradaNarudzba;
     ObradaKorisnik obradaKorisnik;
     ObradaKomponenta obradaKomponenta;
@@ -45,9 +45,9 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
         obradaRacunalo = new ObradaRacunalo();
         ucitajNarudzbe();
         ucitajKorisnika();
-
+        
     }
-
+    
     private void preuzmiVrijednosti() {
         var e = obradaNarudzba.getEntitet();
         e.setKorisnik((Korisnik) cmbKorisnik.getSelectedItem());
@@ -75,72 +75,85 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
         }
         //lblBrojNarudzbe.setText(String.valueOf(e.getSifra()));
     }
-
+    
     private void ucitajNarudzbe() {
         DefaultListModel<Narudzba> narudzbe = new DefaultListModel<>();
         List<Narudzba> entiteti = obradaNarudzba.read();
-
+        
         for (Narudzba n : entiteti) {
             narudzbe.addElement(n);
         }
         lstEntiteti.setModel(narudzbe);
     }
-
+    
     private void ucitajKorisnika() {
         DefaultComboBoxModel<Korisnik> mk = new DefaultComboBoxModel<>();
         Korisnik korisnik = new Korisnik();
         korisnik.setSifra(Long.valueOf(0));
         korisnik.setIme("Nije odabrano!");
         korisnik.setPrezime("Nije odabrano");
-
+        
         mk.addElement(korisnik);
         new ObradaKorisnik().read().forEach(s -> {
             mk.addElement(s);
         });
-
+        
         cmbKorisnik.setModel(mk);
-
+        
     }
-
+    
     private void ucitajRacunala() {
         DefaultListModel<Racunalo> racunala = new DefaultListModel<>();
         List<Racunalo> entiteti = obradaRacunalo.read();
-
+        
         if (chbPocetakNazivaRacunalo.isSelected()) {
             entiteti = obradaRacunalo.readPocetakNazivaRacunala(txtUvjetRacunalo.getText().trim());
         } else {
             entiteti = obradaRacunalo.read(txtUvjetRacunalo.getText());
         }
-
+        
         Collections.sort(entiteti, new RacunaloComparator());
-
+        
         for (Racunalo r : entiteti) {
             racunala.addElement(r);
         }
         lstSvaRacunala.setModel(racunala);
-
+        
     }
-
+    
     private void ucitajKomponente() {
         DefaultListModel<Komponenta> komponente = new DefaultListModel<>();
         List<Komponenta> entiteti;
-
+        
         if (chbPocetakNazivaKomponenta.isSelected()) {
             entiteti = obradaKomponenta.readPocetakNazivaKomponente(txtUvjetKomponenta.getText().trim());
         } else {
             entiteti = obradaKomponenta.read(txtUvjetKomponenta.getText());
         }
-
+        
         Collections.sort(entiteti, new KomponentaComparator());
         for (Komponenta k : entiteti) {
             komponente.addElement(k);
         }
         lstSveKomponente.setModel(komponente);
     }
-    private boolean postojiKomponentaUNarudzbi(DefaultListModel<Komponenta> m, Komponenta k){
-        for (int i = 0; i < m.size(); i++){
-            if()
+    
+    private boolean postojiKomponentaUNarudzbi(DefaultListModel<Komponenta> m, Komponenta k) {
+        for (int i = 0; i < m.size(); i++) {
+            if (m.get(i).getSifra().equals(k.getSifra())) {
+                return true;
+            }
         }
+        return false;
+    }
+    
+    private boolean postojiRacunaloUNarudzbi(DefaultListModel<Racunalo> m, Racunalo r) {
+        for (int i = 0; i < m.size(); i++) {
+            if (m.get(i).getSifra().equals(r.getSifra())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -202,6 +215,11 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
         jScrollPane2.setViewportView(lstRacunalaNaNarudzbi);
 
         btnDodajRacunalo.setText(" <<");
+        btnDodajRacunalo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajRacunaloActionPerformed(evt);
+            }
+        });
 
         btnMakniRacunalo.setText(">>");
         btnMakniRacunalo.addActionListener(new java.awt.event.ActionListener() {
@@ -312,9 +330,9 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDodajKomponentu)
-                            .addComponent(btnMakniKomponentu, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnMakniKomponentu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDodajKomponentu, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -420,18 +438,37 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMakniRacunaloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakniRacunaloActionPerformed
-        // TODO add your handling code here:
+        DefaultListModel<Racunalo> m = (DefaultListModel<Racunalo>) lstRacunalaNaNarudzbi.getModel();
+        for(Racunalo r : lstRacunalaNaNarudzbi.getSelectedValuesList()) {
+            m.removeElement(r);
+            for(Racunalo mr : obradaNarudzba.getEntitet().getRacunala()) {
+                if(mr.getSifra().equals(r.getSifra())) {
+                    obradaNarudzba.getEntitet().getRacunala().remove(mr);
+                    break;
+                }
+            }
+        }
     }//GEN-LAST:event_btnMakniRacunaloActionPerformed
 
     private void btnMakniKomponentuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakniKomponentuActionPerformed
-        // TODO add your handling code here:
+        DefaultListModel<Komponenta> m = (DefaultListModel<Komponenta>) lstKomponentaNaNarudzbi.getModel();
+        for (Komponenta k : lstKomponentaNaNarudzbi.getSelectedValuesList()) {
+            m.removeElement(k);
+            for (Komponenta mk : obradaNarudzba.getEntitet().getKomponente()) {
+                if (mk.getSifra().equals(k.getSifra())) {
+                    obradaNarudzba.getEntitet().getKomponente().remove(mk);
+                    break;
+                }
+            }
+        }
+
     }//GEN-LAST:event_btnMakniKomponentuActionPerformed
 
     private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
         if (evt.getValueIsAdjusting() || lstEntiteti.getSelectedValue() == null) {
             return;
         }
-
+        
         obradaNarudzba.setEntitet(lstEntiteti.getSelectedValue());
         var e = obradaNarudzba.getEntitet();
         if (e.getDatumNarudzbe() != null) {
@@ -439,7 +476,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
         } else {
             dpDatumNarudzbe.setDate(null);
         }
-
+        
         if (e.getDatumOtpreme() != null) {
             dpDatumOtpreme.setDate(e.getDatumOtpreme().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         } else {
@@ -450,21 +487,21 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
         } else {
             cmbKorisnik.setSelectedItem(e.getKorisnik());
         }
-
+        
         DefaultListModel<Komponenta> mk = new DefaultListModel<>();
         if (e.getKomponente() != null) {
             Collections.sort(e.getKomponente(), new KomponentaComparator());
             mk.addAll(e.getKomponente());
         }
         lstKomponentaNaNarudzbi.setModel(mk);
-
+        
         DefaultListModel<Racunalo> mr = new DefaultListModel<>();
         if (e.getRacunala() != null) {
             Collections.sort(e.getRacunala(), new RacunaloComparator());
             mr.addAll(e.getRacunala());
         }
         lstRacunalaNaNarudzbi.setModel(mr);
-
+        
 
     }//GEN-LAST:event_lstEntitetiValueChanged
 
@@ -476,7 +513,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
             preuzmiVrijednosti();
             obradaNarudzba.create();
             ucitajNarudzbe();
-
+            
         } catch (ZavrsniRadException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
         }
@@ -489,7 +526,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
             return;
         }
         preuzmiVrijednosti();
-
+        
         try {
             obradaNarudzba.update();
             ucitajNarudzbe();
@@ -504,7 +541,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(getRootPane(), "Odaberite što želite obrisati!");
             return;
         }
-
+        
         if (JOptionPane.showConfirmDialog(getRootPane(),
                 "Sigurno želite obrisati: \"" + obradaNarudzba.getEntitet().getSifra() + "\"?",
                 "Brisanje",
@@ -512,9 +549,9 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
                 JOptionPane.QUESTION_MESSAGE)
                 == JOptionPane.NO_OPTION) {
             return;
-
+            
         }
-
+        
         try {
             obradaNarudzba.delete();
             ucitajNarudzbe();
@@ -554,15 +591,43 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
             m = new DefaultListModel<>();
             lstKomponentaNaNarudzbi.setModel(m);
         }
-        if(obradaNarudzba.getEntitet().getKomponente()==null) {
+        if (obradaNarudzba.getEntitet().getKomponente() == null) {
             obradaNarudzba.getEntitet().setKomponente(new ArrayList<>());
         }
         
-        for(Komponenta k : lstSveKomponente.getSelectedValuesList()){
-            if(!)
+        for (Komponenta k : lstSveKomponente.getSelectedValuesList()) {
+            if (!postojiKomponentaUNarudzbi(m, k)) {
+                obradaNarudzba.getEntitet().getKomponente().add(k);
+                m.addElement(k);
+            }
         }
+        lstKomponentaNaNarudzbi.repaint();
 
     }//GEN-LAST:event_btnDodajKomponentuActionPerformed
+
+    private void btnDodajRacunaloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajRacunaloActionPerformed
+        DefaultListModel<Racunalo> m;
+        if (obradaNarudzba.getEntitet() != null) {
+            m = (DefaultListModel<Racunalo>) lstRacunalaNaNarudzbi.getModel();
+        } else {
+            obradaNarudzba.setEntitet(new Narudzba());
+            obradaNarudzba.getEntitet().setKomponente(new ArrayList<>());
+            preuzmiVrijednosti();
+            m = new DefaultListModel<>();
+            lstRacunalaNaNarudzbi.setModel(m);
+        }
+        if (obradaNarudzba.getEntitet().getRacunala() == null) {
+            obradaNarudzba.getEntitet().setRacunala(new ArrayList<>());
+        }
+        
+        for(Racunalo r : lstSvaRacunala.getSelectedValuesList()) {
+            if(!postojiRacunaloUNarudzbi(m, r)) {
+                obradaNarudzba.getEntitet().getRacunala().add(r);
+                m.addElement(r);
+            }
+        }
+        lstRacunalaNaNarudzbi.repaint();
+    }//GEN-LAST:event_btnDodajRacunaloActionPerformed
 
     /**
      * @param args the command line arguments
