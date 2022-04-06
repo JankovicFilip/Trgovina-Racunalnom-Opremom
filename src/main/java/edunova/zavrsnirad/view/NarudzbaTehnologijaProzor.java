@@ -69,7 +69,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
         } else {
             e.setDatumOtpreme(null);
         }
-        lblBrojNarudzbe.setText(String.valueOf(e.getSifra()));
+        //lblBrojNarudzbe.setText(String.valueOf(e.getSifra()));
     }
     
     private void ucitajNarudzbe(){
@@ -147,7 +147,6 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
         lstKomponentaNaNarudzbi = new javax.swing.JList<>();
         btnDodajKomponentu = new javax.swing.JButton();
         btnMakniKomponentu = new javax.swing.JButton();
-        lblBrojNarudzbe = new javax.swing.JLabel();
         btnKreiraj = new javax.swing.JButton();
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
@@ -220,8 +219,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbKorisnik, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblBrojNarudzbe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,9 +242,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(lblBrojNarudzbe, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(144, 144, 144)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dpDatumNarudzbe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,7 +299,47 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMakniKomponentuActionPerformed
 
     private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
-        // TODO add your handling code here:
+        if (evt.getValueIsAdjusting() || lstEntiteti.getSelectedValue() == null) {
+            return;
+        }
+        
+        obradaNarudzba.setEntitet(lstEntiteti.getSelectedValue());
+        var e = obradaNarudzba.getEntitet();
+        if (e.getDatumNarudzbe()!= null) {
+            dpDatumNarudzbe.setDate(e.getDatumNarudzbe().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        } else {
+            dpDatumNarudzbe.setDate(null);
+        }
+        
+        if (e.getDatumOtpreme()!= null) {
+            dpDatumOtpreme.setDate(e.getDatumOtpreme().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        } else {
+            dpDatumOtpreme.setDate(null);
+        }
+        if(e.getKorisnik()==null){
+            cmbKorisnik.setSelectedIndex(0);
+        }else{
+            cmbKorisnik.setSelectedItem(e.getKorisnik());
+        }
+        
+        DefaultListModel<Komponenta> mk = new DefaultListModel<>();
+        if(e.getKomponente()!=null){
+            Collections.sort(e.getKomponente(), new KomponentaComparator());
+            mk.addAll(e.getKomponente());
+        }
+        lstKomponentaNaNarudzbi.setModel(mk);
+        
+        DefaultListModel<Racunalo> mr = new DefaultListModel<>();
+        if(e.getRacunala()!=null){
+            Collections.sort(e.getRacunala(), new RacunaloComparator());
+            mr.addAll(e.getRacunala());
+        }
+        lstRacunalaNaNarudzbi.setModel(mr);
+        
+        
+        
+        
+        
     }//GEN-LAST:event_lstEntitetiValueChanged
 
     /**
@@ -330,7 +366,6 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JLabel lblBrojNarudzbe;
     private javax.swing.JList<Narudzba> lstEntiteti;
     private javax.swing.JList<Komponenta> lstKomponentaNaNarudzbi;
     private javax.swing.JList<Racunalo> lstRacunalaNaNarudzbi;
