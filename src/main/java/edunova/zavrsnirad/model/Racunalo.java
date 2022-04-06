@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -65,5 +66,8 @@ public class Racunalo extends Entitet{
     public void setNarudzbe(List<Narudzba> narudzbe) {
         this.narudzbe = narudzbe;
     }
+    
+    
+
     
 }

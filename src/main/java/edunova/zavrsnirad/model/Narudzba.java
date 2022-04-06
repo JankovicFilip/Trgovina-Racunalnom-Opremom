@@ -4,6 +4,7 @@
  */
 package edunova.zavrsnirad.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -80,5 +81,6 @@ public class Narudzba extends Entitet {
     public void setDatumOtpreme(Date datumOtpreme) {
         this.datumOtpreme = datumOtpreme;
     }
-
+    
+    
 }

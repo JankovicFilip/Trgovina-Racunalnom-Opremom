@@ -9,6 +9,7 @@ import edunova.zavrsnirad.model.Komponenta;
 import edunova.zavrsnirad.model.Narudzba;
 import edunova.zavrsnirad.model.Racunalo;
 import edunova.zavrsnirad.util.OperaterUtil;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
@@ -19,9 +20,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class NarudzbaProzor extends javax.swing.JFrame {
+public class KosaricaProzor extends javax.swing.JFrame {
     
     private ObradaNarudzba obrada;
+    private Racunalo r;
+    private Komponenta k;
+    
     
     
     DefaultTableModel table;
@@ -29,10 +33,23 @@ public class NarudzbaProzor extends javax.swing.JFrame {
     /**
      * Creates new form NarudzbaProzor
      */
-    public NarudzbaProzor() {
+    public KosaricaProzor() {
         initComponents();
         obrada = new ObradaNarudzba();
         ucitaj();
+        
+    }
+    
+    public BigDecimal getUkupnaCijena() {
+        BigDecimal suma;
+        BigDecimal a = r.getCijena();
+        BigDecimal b = k.getCijena();
+        
+        suma = a.add(b);
+        
+        return suma;
+        
+        
         
     }
 
@@ -56,7 +73,7 @@ public class NarudzbaProzor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Broj narudžbe", "Ime i prezime korisnika", "Komponenta", "Računalo"
+                "Broj narudžbe", "Ime i prezime korisnika", "Komponenta", "Računalo", "Ukupna cijena"
             }
         ));
         tblNardudzba.setColumnSelectionAllowed(true);
@@ -76,10 +93,10 @@ public class NarudzbaProzor extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(203, 203, 203))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(325, 325, 325))
         );
 
         pack();
@@ -91,13 +108,14 @@ public class NarudzbaProzor extends javax.swing.JFrame {
         List<Narudzba> entiteti = obrada.read();
         
         
+        
         for (Narudzba n : entiteti) {
             Object[] o = new Object[4];
             o[0] = n.getSifra();
             o[1] = n.getKorisnik().toString();            
             o[2] = n.getKomponente();
             o[3] = n.getRacunala();
-            
+            o[4] = getUkupnaCijena();
             
             
             table.addRow(o);

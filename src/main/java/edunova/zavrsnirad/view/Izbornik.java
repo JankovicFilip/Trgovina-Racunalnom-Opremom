@@ -108,7 +108,7 @@ public class Izbornik extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Narudžbe");
+        jMenu2.setText("Narudžbe i košarica");
 
         jmiNarudzbaISveUNjoj.setText("Narudžba");
         jmiNarudzbaISveUNjoj.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +118,7 @@ public class Izbornik extends javax.swing.JFrame {
         });
         jMenu2.add(jmiNarudzbaISveUNjoj);
 
-        jmiNarudzbe.setText("Sve narudžbe");
+        jmiNarudzbe.setText("Košarica");
         jmiNarudzbe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiNarudzbeActionPerformed(evt);
@@ -162,7 +162,7 @@ public class Izbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiKomponenteActionPerformed
 
     private void jmiNarudzbeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNarudzbeActionPerformed
-        new NarudzbaProzor().setVisible(true);
+        new KosaricaProzor().setVisible(true);
     }//GEN-LAST:event_jmiNarudzbeActionPerformed
 
     private void jmiNarudzbaISveUNjojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNarudzbaISveUNjojActionPerformed
