@@ -16,6 +16,26 @@ import java.math.BigDecimal;
 public class test {
 
     private ObradaRacunalo obrada;
+    
+    //OVO JE RAD SA DATUMIMA
+    /* Calendar c = Calendar.getInstance();
+        for(int i=0;i<10;i++){
+            c.set(Calendar.MONTH, 5); // mjeseci kreću od nule
+        c.set(Calendar.DAY_OF_MONTH, slucajniBroj(27, 1));
+        c.set(Calendar.YEAR, 2022);
+        c.set(Calendar.HOUR_OF_DAY,  slucajniBroj(9, 7));
+        c.set(Calendar.MINUTE,  slucajniBroj(59, 1));
+        c.set(Calendar.SECOND, slucajniBroj(59, 1) );
+        System.out.println("Početak: " + c.getTime());
+        if(slucajniBroj(19, 1)>5){
+            c.add(Calendar.MINUTE, slucajniBroj((8*60) + 10, (7 * 60) + 50));
+            System.out.println("Kraj: " + c.getTime());
+        }else{
+            //postaviš završni datum na null (ne moraš ništa raditi)
+        }
+            System.out.println("-------------");
+        
+        }*/
 
     public test() {
         obrada = new ObradaRacunalo();

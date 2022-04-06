@@ -21,13 +21,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class KosaricaProzor extends javax.swing.JFrame {
-    
+
     private ObradaNarudzba obrada;
     private Racunalo r;
     private Komponenta k;
-    
-    
-    
+
     DefaultTableModel table;
 
     /**
@@ -37,10 +35,10 @@ public class KosaricaProzor extends javax.swing.JFrame {
         initComponents();
         obrada = new ObradaNarudzba();
         ucitaj();
-        
+
     }
-    
-    public BigDecimal getUkupnaCijena() {
+
+    /*public BigDecimal getUkupnaCijena() {
         BigDecimal suma;
         BigDecimal a = r.getCijena();
         BigDecimal b = k.getCijena();
@@ -51,8 +49,26 @@ public class KosaricaProzor extends javax.swing.JFrame {
         
         
         
+    }*/
+    public BigDecimal getUkupnaCijena(Narudzba n) {
+        BigDecimal suma = BigDecimal.ZERO;
+        for (Komponenta k : n.getKomponente()) {
+            if (k.getCijena() == null) {
+                continue;
+            }
+            suma = suma.add(k.getCijena());
+        }
+        for (Racunalo r : n.getRacunala()) {
+            if (r.getCijena() == null) {
+                continue;
+            }
+            suma = suma.add(r.getCijena());
+        }
+        return suma;
+
     }
 
+// OVO JE UKUPNA CIJENA OD OBJE KOMPONENTE I U getUkupnaCijana staviti getUkupnaCijena(n);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,22 +118,19 @@ public class KosaricaProzor extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void ucitaj() {
         table = (DefaultTableModel) tblNardudzba.getModel();
         List<Narudzba> entiteti = obrada.read();
-        
-        
-        
+
         for (Narudzba n : entiteti) {
-            Object[] o = new Object[4];
+            Object[] o = new Object[5];
             o[0] = n.getSifra();
-            o[1] = n.getKorisnik().toString();            
+            o[1] = n.getKorisnik().toString();
             o[2] = n.getKomponente();
             o[3] = n.getRacunala();
-            o[4] = getUkupnaCijena();
-            
-            
+            o[4] = getUkupnaCijena(n);
+
             table.addRow(o);
         }
 
@@ -130,7 +143,7 @@ public class KosaricaProzor extends javax.swing.JFrame {
     }
 
     private void preuzmiVrijednosti() {
-        
+
     }
     /**
      * @param args the command line arguments
