@@ -20,6 +20,24 @@ public class ObradaKomponenta extends Obrada<Komponenta> {
     public List<Komponenta> read() {
         return session.createQuery("from Komponenta a order by a.naziv").list();
     }
+    
+    public List<Komponenta> read(String uvjet){
+        return session.createQuery("from Komponenta k "
+                + " where concat(k.naziv,' ',k.opis,' ',k.cijena,' ',ifnull(k.sifra,'')) "
+                + " like :uvjet order by k.naziv")
+                .setParameter("uvjet","%" + uvjet + "%")
+                .setMaxResults(50)
+                .list();
+    }
+    
+    public List<Komponenta> readPocetakNazivaKomponente(String uvjet) {
+        return session.createQuery("from Komponenta k "
+                + " where k.naziv "
+                + " like :uvjet order by k.naziv, k.cijena")
+                .setParameter("uvjet", uvjet + "%")
+                .setMaxResults(50)
+                .list();
+    }
 
     @Override
     protected void kontrolaCreate() throws ZavrsniRadException {

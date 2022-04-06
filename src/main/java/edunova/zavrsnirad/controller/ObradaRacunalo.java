@@ -19,6 +19,25 @@ public class ObradaRacunalo extends Obrada<Racunalo> {
     public List<Racunalo> read() {
         return session.createQuery("from Racunalo a order by a.naziv").list();
     }
+    
+    
+    public List<Racunalo> read(String uvjet){
+        return session.createQuery("from Racunalo r "
+                + " where concat(r.naziv,' ',r.opis,' ',r.cijena,' ',ifnull(r.sifra,'')) "
+                + " like :uvjet order by r.naziv")
+                .setParameter("uvjet","%" + uvjet + "%")
+                .setMaxResults(50)
+                .list();
+    }
+    
+    public List<Racunalo> readPocetakNazivaRacunala(String uvjet) {
+        return session.createQuery("from Racunalo r "
+                + " where r.naziv "
+                + " like :uvjet order by r.naziv, r.cijena")
+                .setParameter("uvjet", uvjet + "%")
+                .setMaxResults(50)
+                .list();
+    }
 
     @Override
     protected void kontrolaCreate() throws ZavrsniRadException {
