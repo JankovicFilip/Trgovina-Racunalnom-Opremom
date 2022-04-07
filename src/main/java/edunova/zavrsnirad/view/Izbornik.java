@@ -110,7 +110,7 @@ public class Izbornik extends javax.swing.JFrame {
 
         jMenu2.setText("Narudžbe i košarica");
 
-        jmiNarudzbaISveUNjoj.setText("Narudžba");
+        jmiNarudzbaISveUNjoj.setText("Košarica");
         jmiNarudzbaISveUNjoj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiNarudzbaISveUNjojActionPerformed(evt);
@@ -118,7 +118,7 @@ public class Izbornik extends javax.swing.JFrame {
         });
         jMenu2.add(jmiNarudzbaISveUNjoj);
 
-        jmiNarudzbe.setText("Košarica");
+        jmiNarudzbe.setText("Sve narudžbe");
         jmiNarudzbe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiNarudzbeActionPerformed(evt);

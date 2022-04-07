@@ -101,6 +101,7 @@ public class SplashScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(700, 700));
         setType(java.awt.Window.Type.UTILITY);
 
         lblNvidia.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Downloads\\ZavrsniRadSlike\\Nvidia.png")); // NOI18N

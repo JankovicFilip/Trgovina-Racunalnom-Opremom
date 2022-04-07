@@ -49,7 +49,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmiNarudzbaISveUNjoj">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Narud&#x17e;ba"/>
+                <Property name="text" type="java.lang.String" value="Ko&#x161;arica"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiNarudzbaISveUNjojActionPerformed"/>
@@ -57,7 +57,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiNarudzbe">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ko&#x161;arica"/>
+                <Property name="text" type="java.lang.String" value="Sve narud&#x17e;be"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiNarudzbeActionPerformed"/>
