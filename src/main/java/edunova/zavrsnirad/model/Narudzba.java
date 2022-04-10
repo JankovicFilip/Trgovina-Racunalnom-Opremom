@@ -57,7 +57,7 @@ public class Narudzba extends Entitet {
 
     @Override
     public String toString() {
-        return datumNarudzbe + " " + datumOtpreme;
+        return korisnik!=null ? korisnik.getIme() + " " + korisnik.getPrezime() : "nepoznati korisnik";
     }
     
     
