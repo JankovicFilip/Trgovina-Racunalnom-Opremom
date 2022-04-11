@@ -10,10 +10,7 @@ import edunova.zavrsnirad.model.Narudzba;
 import edunova.zavrsnirad.model.Racunalo;
 import edunova.zavrsnirad.util.OperaterUtil;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.List;
-import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,6 +30,7 @@ public class KosaricaProzor extends javax.swing.JFrame {
      */
     public KosaricaProzor() {
         initComponents();
+        setTitle(OperaterUtil.getNaslov("Lista svih narudžbi"));
         obrada = new ObradaNarudzba();
         ucitaj();
 
@@ -142,9 +140,7 @@ public class KosaricaProzor extends javax.swing.JFrame {
         lstEntiteti.setModel(narudzbe);*/
     }
 
-    private void preuzmiVrijednosti() {
-
-    }
+    
     /**
      * @param args the command line arguments
      */

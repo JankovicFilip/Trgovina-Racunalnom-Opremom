@@ -1,7 +1,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-        <!-- create database zavrsnirad character set utf8mb4; -->
+        <!-- create database zavrsnirad character set utf8mb4 collate utf8mb4_croatian_ci; -->
        
 <hibernate-configuration>
     <session-factory>
@@ -9,7 +9,7 @@
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
         <property name="connection.url">jdbc:mariadb://localhost:3306/zavrsnirad?useSSL=false</property>
         <property name="connection.username">edunova</property>
-        <property name="connection.password">nesto</property>
+        <property name="connection.password">edunova</property>
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">5</property>
         <!-- Select our SQL dialect -->

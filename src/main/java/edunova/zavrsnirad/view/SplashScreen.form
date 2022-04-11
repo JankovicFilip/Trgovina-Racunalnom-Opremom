@@ -4,9 +4,6 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="undecorated" type="boolean" value="true"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[700, 700]"/>
-    </Property>
     <Property name="type" type="java.awt.Window$Type" editor="org.netbeans.modules.form.editors.EnumEditor">
       <Value id="UTILITY"/>
     </Property>
@@ -30,17 +27,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pbUcitanje" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="lblNvidia" min="-2" max="-2" attributes="0"/>
+          <Component id="lblSlika" alignment="0" min="-2" pref="606" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="lblNvidia" min="-2" pref="541" max="-2" attributes="0"/>
+              <Component id="lblSlika" min="-2" pref="536" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="pbUcitanje" min="-2" pref="38" max="-2" attributes="0"/>
           </Group>
@@ -48,20 +46,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblNvidia">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Downloads\ZavrsniRadSlike\Nvidia.png"/>
-        </Property>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[1200, 474]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[1200, 474]"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JProgressBar" name="pbUcitanje">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSlika">
     </Component>
   </SubComponents>
 </Form>

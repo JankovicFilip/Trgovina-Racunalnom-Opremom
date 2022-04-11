@@ -24,41 +24,37 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Admin
  */
-public class PocetniInsert {
+public class PocetniInsertNovo {
 
     public static void inicijalniPodaci() {
         //PocetniInsert.unosKorisnika();
-        PocetniInsert.izvedi();
+        PocetniInsertNovo.izvedi();
     }
-    
-    
-    private static int slucajniBroj(int max,int min){
+
+    private static int slucajniBroj(int max, int min) {
         return (int) ((Math.random() * (max - min)) + min);
     }
-    
+
     public static void test2() {
-        List<Komponenta> komponente =   new ArrayList<>();
+        List<Komponenta> komponente = new ArrayList<>();
         Komponenta k;
-        for(int i = 0; i<50;i++) {
-            k=new Komponenta();
+        for (int i = 0; i < 50; i++) {
+            k = new Komponenta();
             k.setNaziv("NVIDIA GTX" + " " + slucajniBroj(4000, 1000));
-            
+
             System.out.println(k.getNaziv());
-            
+
         }
-        
-        
+
     }
 
     public static void main(String[] args) {
         test2();
     }
-    
+
     public static void unosKorisnika() {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-
-        
 
     }
 
@@ -145,7 +141,7 @@ public class PocetniInsert {
                 Collections.shuffle(komponente);
                 Collections.shuffle(racunala);
                 n.setKomponente(new ArrayList<>());
-                for (int a = 0; a < ((int) Math.random() * (10 - 8) +2 ); a++) {
+                for (int a = 0; a < ((int) Math.random() * (10 - 8) + 2); a++) {
                     n.getKomponente().add(komponente.get(a));
                 }
                 n.setRacunala(new ArrayList<>());
@@ -185,11 +181,11 @@ public class PocetniInsert {
         List<Komponenta> komponente = new ArrayList<>();
         Komponenta k;
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 25; i++) {
 
             k = new Komponenta();
 
-            k.setNaziv(faker.book().title());
+            k.setNaziv("NVIDIA RTX" + " " + slucajniBroj(4000, 3000));
 
             k.setOpis(faker.harryPotter().quote());
 
@@ -199,6 +195,23 @@ public class PocetniInsert {
             komponente.add(k);
             System.out.println("Kreirao komponentu: " + k.getNaziv() + k.getSifra());
         }
+        
+        for (int j = 0; j < 25; j++) {
+
+            k = new Komponenta();
+
+            k.setNaziv("AMD Radeon" + " " + slucajniBroj(7000, 5000));
+
+            k.setOpis(faker.harryPotter().quote());
+
+            k.setCijena(new BigDecimal(Math.random() * (10000 - 8000) + 5000));
+
+            session.save(k);
+            komponente.add(k);
+            System.out.println("Kreirao komponentu: " + k.getNaziv() + k.getSifra());
+        }
+        
+        
 
         return komponente;
 
@@ -212,7 +225,21 @@ public class PocetniInsert {
         for (int i = 0; i < 50; i++) {
 
             r = new Racunalo();
-            r.setNaziv(faker.book().title());
+            r.setNaziv("Office PC HP" + " " +slucajniBroj(1000, 500));
+
+            r.setOpis(faker.harryPotter().quote());
+
+            r.setCijena(new BigDecimal(Math.random() * (10000 - 2000) + 5000));
+
+            session.save(r);
+            racunala.add(r);
+            System.out.println("Kreirao racunalo: " + r.getNaziv() + r.getSifra());
+        }
+        
+        for (int i = 0; i < 50; i++) {
+
+            r = new Racunalo();
+            r.setNaziv("Gaming računalo ASUS ROG" + " " +slucajniBroj(2000, 1000));
 
             r.setOpis(faker.harryPotter().quote());
 

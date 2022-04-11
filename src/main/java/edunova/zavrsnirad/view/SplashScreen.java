@@ -8,7 +8,12 @@ import edunova.zavrsnirad.controller.ObradaKorisnik;
 import edunova.zavrsnirad.controller.ObradaOperater;
 import edunova.zavrsnirad.util.HibernateUtil;
 import edunova.zavrsnirad.util.PocetniInsert;
+import edunova.zavrsnirad.util.PocetniInsertNovo;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.apache.commons.imaging.Imaging;
 import org.hibernate.Session;
 
 
@@ -27,6 +32,7 @@ public class SplashScreen extends javax.swing.JFrame {
     public SplashScreen() {
         initComponents();
         postavke();
+        slika();
     }
     
     private void postavke(){
@@ -38,6 +44,20 @@ public class SplashScreen extends javax.swing.JFrame {
         TijekUcitanja tijekUcitanja = new TijekUcitanja();
         tijekUcitanja.start();
         
+    }
+    private void slika(){
+        try {
+            File nvidia = new File("slike" + File.separator + "splashscreen" + File.separator + "nvidia.png");
+            ImageIcon ii;
+            
+                ii = new ImageIcon(Imaging.getBufferedImage(nvidia)
+                        .getScaledInstance(606, 536, Image.SCALE_DEFAULT));
+            
+            lblSlika.setIcon(ii);
+            System.out.println(nvidia.getAbsolutePath());
+                    
+        } catch (Exception e) {
+        }
     }
     
     private class TijekUcitanja extends Thread {
@@ -66,7 +86,7 @@ public class SplashScreen extends javax.swing.JFrame {
             Session s = HibernateUtil.getSession();
             if (s.getMetamodel().getEntities().size() > 0) {
                 if (new ObradaKorisnik().read().isEmpty()) {
-                    PocetniInsert.inicijalniPodaci();
+                    PocetniInsertNovo.inicijalniPodaci();
                 }
                 hibernateGotov = true;
                 for (int t = i; t < 100; t++) {
@@ -96,17 +116,12 @@ public class SplashScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblNvidia = new javax.swing.JLabel();
         pbUcitanje = new javax.swing.JProgressBar();
+        lblSlika = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(700, 700));
         setType(java.awt.Window.Type.UTILITY);
-
-        lblNvidia.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Downloads\\ZavrsniRadSlike\\Nvidia.png")); // NOI18N
-        lblNvidia.setMaximumSize(new java.awt.Dimension(1200, 474));
-        lblNvidia.setMinimumSize(new java.awt.Dimension(1200, 474));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,13 +129,14 @@ public class SplashScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pbUcitanje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(lblNvidia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pbUcitanje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(lblSlika, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblNvidia, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSlika, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pbUcitanje, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -135,7 +151,7 @@ public class SplashScreen extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblNvidia;
+    private javax.swing.JLabel lblSlika;
     private javax.swing.JProgressBar pbUcitanje;
     // End of variables declaration//GEN-END:variables
 }
