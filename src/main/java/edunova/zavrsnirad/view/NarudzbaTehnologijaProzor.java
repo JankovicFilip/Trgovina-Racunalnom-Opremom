@@ -581,6 +581,8 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
 
     private void btnDodajKomponentuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajKomponentuActionPerformed
         DefaultListModel<Komponenta> m;
+        DefaultListModel<Racunalo> m1;
+        
         try {
             if (obradaNarudzba.getEntitet() != null) {
                 m = (DefaultListModel<Komponenta>) lstKomponentaNaNarudzbi.getModel();
@@ -588,10 +590,13 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
             } else {
                 obradaNarudzba.setEntitet(new Narudzba());
                 obradaNarudzba.getEntitet().setKomponente(new ArrayList<>());
-                //obradaNarudzba.getEntitet().setRacunala(new ArrayList<>());
+                obradaNarudzba.getEntitet().setRacunala(new ArrayList<>());
                 preuzmiVrijednosti();
                 m = new DefaultListModel<>();
+                m1 = new DefaultListModel<>();
+                
                 lstKomponentaNaNarudzbi.setModel(m);
+                lstRacunalaNaNarudzbi.setModel(m1);
             }
             if (obradaNarudzba.getEntitet().getKomponente() == null) {
                 obradaNarudzba.getEntitet().setKomponente(new ArrayList<>());
@@ -617,6 +622,7 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
 
     private void btnDodajRacunaloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajRacunaloActionPerformed
         DefaultListModel<Racunalo> m;
+        DefaultListModel<Komponenta> m1;
         try {
             if (obradaNarudzba.getEntitet() != null) {
                 m = (DefaultListModel<Racunalo>) lstRacunalaNaNarudzbi.getModel();
@@ -624,9 +630,12 @@ public class NarudzbaTehnologijaProzor extends javax.swing.JFrame {
             } else {
                 obradaNarudzba.setEntitet(new Narudzba());
                 obradaNarudzba.getEntitet().setRacunala(new ArrayList<>());
+                obradaNarudzba.getEntitet().setKomponente(new ArrayList<>());
                 preuzmiVrijednosti();
                 m = new DefaultListModel<>();
+                m1 = new DefaultListModel<>();
                 lstRacunalaNaNarudzbi.setModel(m);
+                lstKomponentaNaNarudzbi.setModel(m1);
             }
             if (obradaNarudzba.getEntitet().getRacunala() == null) {
                 obradaNarudzba.getEntitet().setRacunala(new ArrayList<>());
