@@ -91,7 +91,7 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
     }
 
     private void kontrolaNoviEmail() throws ZavrsniRadException{
-        List<Osoba> osobe = session.createQuery("from Osoba o "
+        List<Osoba> osobe = session.createQuery("from Korisnik o "
                 + "where o.email=:email")
                 .setParameter("email", entitet.getEmail()).list();
         

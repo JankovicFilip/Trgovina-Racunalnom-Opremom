@@ -54,6 +54,7 @@ public class Autorizacija extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnPrijava = new javax.swing.JButton();
         txtLozinka = new javax.swing.JPasswordField();
+        btnRegistracija = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -103,6 +104,13 @@ public class Autorizacija extends javax.swing.JFrame {
             }
         });
 
+        btnRegistracija.setText("Registriraj se");
+        btnRegistracija.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistracijaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,9 +130,13 @@ public class Autorizacija extends javax.swing.JFrame {
                                 .addGap(90, 90, 90)
                                 .addComponent(jLabel1))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
+                        .addGap(146, 146, 146)
                         .addComponent(btnPrijava)))
                 .addGap(0, 93, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(btnRegistracija)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +149,10 @@ public class Autorizacija extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(btnPrijava)
-                .addGap(47, 47, 47))
+                .addGap(35, 35, 35)
+                .addComponent(btnRegistracija))
         );
 
         pack();
@@ -193,6 +206,10 @@ public class Autorizacija extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
+    private void btnRegistracijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistracijaActionPerformed
+        new Registracija().setVisible(true);
+    }//GEN-LAST:event_btnRegistracijaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -201,6 +218,7 @@ public class Autorizacija extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Email;
     private javax.swing.JButton btnPrijava;
+    private javax.swing.JButton btnRegistracija;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtEmail;

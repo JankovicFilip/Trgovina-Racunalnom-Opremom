@@ -71,7 +71,7 @@ public class ObradaKorisnik extends ObradaOsoba<Korisnik> {
 
     private void kontrolaBrojTelefona() throws ZavrsniRadException {
 
-        char[] dozvoljeno = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+'};
+        /*char[] dozvoljeno = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+'};
         if (entitet.getBrojTelefona() != null) {
             for (int i = 0; i < entitet.getBrojTelefona().length(); i++) {
                 for (char c : dozvoljeno) {
@@ -81,7 +81,7 @@ public class ObradaKorisnik extends ObradaOsoba<Korisnik> {
                     }
                 }
             }
-        }
+        }*/
 
         if (entitet.getBrojTelefona().isEmpty() || entitet.getBrojTelefona() == null) {
             throw new ZavrsniRadException("Broj telefona ne smije biti prazan!!");
@@ -92,12 +92,12 @@ public class ObradaKorisnik extends ObradaOsoba<Korisnik> {
         if(entitet.getLozinka() == null || entitet.getLozinka().trim().isEmpty()){
             throw new ZavrsniRadException("Lozinka ne smije biti prazna!");
         }
-        if(entitet.getLozinka().trim().length()<8) {
+        /*if(entitet.getLozinka().trim().length()<8) {
             throw new ZavrsniRadException("Lozinka mora imati minimalno 8 znakova!");
         }
         if(entitet.getLozinka().trim().length()>20) {
             throw new ZavrsniRadException("Lozinka može imati maksimalno 20 znakova!");
-        }
+        }*/
     }
 
     
